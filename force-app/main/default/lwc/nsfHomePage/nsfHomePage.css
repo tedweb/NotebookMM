@@ -1,6 +1,13 @@
+:host {
+    display: block;
+    height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+    overflow: hidden;
+}
+
 .home-container {
     display: flex;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 
