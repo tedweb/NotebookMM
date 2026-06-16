@@ -1,0 +1,161 @@
+<template>
+    <div class="home-container">
+        <!-- Left Sidebar: Catalog List -->
+        <div class="sidebar-panel">
+            <c-nsf-catalog-sidebar
+                catalogs={catalogs}
+                selected-catalog-id={selectedCatalogId}
+                onselectcatalog={handleSelectCatalog}
+                onaddcatalog={handleAddCatalog}
+                oneditcatalog={handleEditCatalog}
+                ondeletecatalog={handleDeleteCatalog}
+            ></c-nsf-catalog-sidebar>
+        </div>
+
+        <!-- Main Content: Topic Cards Grid -->
+        <div class="main-panel">
+            <template if:true={hasTopics}>
+                <div class="topic-grid">
+                    <template for:each={topics} for:item="topic">
+                        <c-nsf-topic-card
+                            key={topic.Id}
+                            topic={topic}
+                            onedittopic={handleEditTopic}
+                            ondeletetopic={handleDeleteTopic}
+                            onopennotebook={handleOpenNotebook}
+                            onaddnotebook={handleAddNotebook}
+                            oneditnotebook={handleEditNotebook}
+                            ondeletenotebook={handleDeleteNotebook}
+                        ></c-nsf-topic-card>
+                    </template>
+                </div>
+            </template>
+            <template if:false={hasTopics}>
+                <div class="empty-state">
+                    <lightning-icon
+                        icon-name="standard:folder"
+                        size="large"
+                        class="empty-state-icon"
+                    ></lightning-icon>
+                    <p class="empty-state-heading">
+                        No topics in this section
+                    </p>
+                    <p class="empty-state-subtext">
+                        Create a topic to start organizing your notebooks.
+                    </p>
+                    <template if:true={selectedCatalogId}>
+                        <lightning-button
+                            label="Add Topic"
+                            variant="brand-outline"
+                            onclick={handleAddTopic}
+                        ></lightning-button>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Floating Add Topic button -->
+            <template if:true={selectedCatalogId}>
+                <lightning-button
+                    label="Add Topic"
+                    variant="brand"
+                    icon-name="utility:add"
+                    onclick={handleAddTopic}
+                    class="add-topic-btn"
+                ></lightning-button>
+            </template>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODALS                                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Catalog Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="catalog-modal"
+        header={catalogModalHeader}
+        confirm-button-label="Save"
+        error-message={catalogModalError}
+        onconfirm={handleCatalogConfirm}
+    >
+        <lightning-input
+            label="Catalog Title"
+            value={catalogModalTitle}
+            onchange={handleCatalogTitleChange}
+            required
+        ></lightning-input>
+    </c-lwc-modal>
+
+    <!-- Topic Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="topic-modal"
+        header={topicModalHeader}
+        confirm-button-label="Save"
+        error-message={topicModalError}
+        onconfirm={handleTopicConfirm}
+    >
+        <lightning-input
+            label="Topic Title"
+            value={topicModalTitle}
+            onchange={handleTopicTitleChange}
+            required
+            class="slds-m-bottom_small"
+        ></lightning-input>
+        <lightning-combobox
+            label="Catalog"
+            value={topicModalCatalogId}
+            options={catalogOptions}
+            onchange={handleTopicCatalogChange}
+            required
+        ></lightning-combobox>
+    </c-lwc-modal>
+
+    <!-- Notebook Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="notebook-modal"
+        header={notebookModalHeader}
+        confirm-button-label="Save"
+        error-message={notebookModalError}
+        onconfirm={handleNotebookConfirm}
+    >
+        <lightning-input
+            label="Notebook Title"
+            value={notebookModalTitle}
+            onchange={handleNotebookTitleChange}
+            required
+            class="slds-m-bottom_small"
+        ></lightning-input>
+        <lightning-combobox
+            label="Topic"
+            value={notebookModalTopicId}
+            options={topicOptions}
+            onchange={handleNotebookTopicChange}
+            required
+        ></lightning-combobox>
+    </c-lwc-modal>
+
+    <!-- Delete Catalog Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-catalog"
+        header="Delete Catalog"
+        message={deleteCatalogMessage}
+        onconfirm={handleConfirmDeleteCatalog}
+    ></c-nsf-confirmation-modal>
+
+    <!-- Delete Topic Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-topic"
+        header="Delete Topic"
+        message={deleteTopicMessage}
+        onconfirm={handleConfirmDeleteTopic}
+    ></c-nsf-confirmation-modal>
+
+    <!-- Delete Notebook Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-notebook"
+        header="Delete Notebook"
+        message={deleteNotebookMessage}
+        confirm-label="Delete"
+        onconfirm={handleConfirmDeleteNotebook}
+    ></c-nsf-confirmation-modal>
+</template>

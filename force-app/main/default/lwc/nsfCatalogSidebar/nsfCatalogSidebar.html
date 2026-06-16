@@ -1,0 +1,48 @@
+<template>
+    <div class="sidebar-container">
+        <template if:true={hasCatalogs}>
+            <ul class="catalog-list">
+                <template for:each={catalogItems} for:item="cat">
+                    <li
+                        key={cat.id}
+                        class={cat.itemClass}
+                        data-id={cat.id}
+                        onclick={handleSelectCatalog}
+                    >
+                        <span class="catalog-title">{cat.title}</span>
+                        <div class="catalog-hover-actions">
+                            <lightning-button-icon
+                                icon-name="utility:edit"
+                                alternative-text="Edit Catalog"
+                                variant="bare"
+                                size="x-small"
+                                data-id={cat.id}
+                                data-title={cat.title}
+                                onclick={handleEditCatalog}
+                            ></lightning-button-icon>
+                            <lightning-button-icon
+                                icon-name="utility:delete"
+                                alternative-text="Delete Catalog"
+                                variant="bare"
+                                size="x-small"
+                                data-id={cat.id}
+                                data-title={cat.title}
+                                onclick={handleDeleteCatalog}
+                            ></lightning-button-icon>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={hasCatalogs}>
+            <div class="empty-state slds-p-around_medium slds-text-color_weak">
+                No catalogs yet. Add one to get started.
+            </div>
+        </template>
+        <div class="sidebar-spacer"></div>
+        <div class="add-catalog-item" onclick={handleAddCatalog} role="button" tabindex="0" onkeydown={handleAddCatalogKeydown}>
+            <lightning-icon icon-name="utility:add" size="xx-small" class="add-catalog-icon"></lightning-icon>
+            <span class="add-catalog-label">Add Catalog</span>
+        </div>
+    </div>
+</template>

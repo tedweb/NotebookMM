@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NSF_ExamId__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Exam</label>
+    <referenceTo>NSF_Exam__c</referenceTo>
+    <relationshipLabel>Bookmarks</relationshipLabel>
+    <relationshipName>Bookmarks_Exam</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

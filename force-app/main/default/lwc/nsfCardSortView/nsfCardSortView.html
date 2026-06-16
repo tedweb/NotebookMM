@@ -1,0 +1,74 @@
+<template>
+    <!-- Loading spinner -->
+    <template if:true={isLoading}>
+        <div class="loading-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template if:false={isLoading}>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- HEADER                                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="sort-header">
+            <span class="sort-title">Reorder Cards</span>
+            <div class="sort-controls">
+                <lightning-button-icon
+                    icon-name="utility:arrowup"
+                    alternative-text="Move up"
+                    variant="border-filled"
+                    onclick={handleMoveUp}
+                    class="slds-m-right_xx-small"
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:arrowdown"
+                    alternative-text="Move down"
+                    variant="border-filled"
+                    onclick={handleMoveDown}
+                ></lightning-button-icon>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- CARD LIST                               -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={hasCards}>
+            <div class="sort-list">
+                <template for:each={displayCards} for:item="card">
+                    <div
+                        key={card.id}
+                        class={card.rowClass}
+                        data-index={card.index}
+                        onclick={handleSelectRow}
+                    >
+                        <span class="sort-row-number">{card.position}</span>
+                        <span class="sort-row-text">{card.front}</span>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:false={hasCards}>
+            <div class="empty-state">
+                <p>No cards in this section to reorder.</p>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- FOOTER                                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="sort-footer">
+            <lightning-button
+                label="Cancel"
+                variant="neutral"
+                onclick={handleCancel}
+            ></lightning-button>
+            <lightning-button
+                label="Save Order"
+                variant="brand"
+                onclick={handleSave}
+                disabled={isSaving}
+            ></lightning-button>
+        </div>
+    </template>
+</template>

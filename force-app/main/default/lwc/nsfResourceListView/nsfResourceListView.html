@@ -1,0 +1,161 @@
+<template>
+    <div class="resource-list-container">
+
+        <!-- Bookmarked Resources Section -->
+        <template if:true={hasBookmarks}>
+            <c-nsf-section-card
+                section-title="Bookmarked Resources"
+                is-bookmark-section
+            >
+                <template for:each={bookmarkedResources} for:item="res">
+                    <c-nsf-resource-item
+                        key={res.id}
+                        resource-id={res.id}
+                        title={res.title}
+                        link={res.link}
+                        resource-type={res.type}
+                        is-bookmarked={res.isBookmarked}
+                        section-id={res.sectionId}
+                        oneditresource={handleEditResource}
+                        ontogglebookmark={handleToggleBookmark}
+                        ondeleteresource={handleConfirmDeleteResource}
+                    ></c-nsf-resource-item>
+                </template>
+            </c-nsf-section-card>
+        </template>
+
+        <!-- Regular Sections with Resources -->
+        <template if:true={hasSections}>
+            <template for:each={sectionsWithResources} for:item="section">
+                <c-nsf-section-card
+                    key={section.sectionId}
+                    section-title={section.title}
+                    section-id={section.sectionId}
+                    action-button-label="Add Resource"
+                    oneditsection={handleEditSection}
+                    ondeletesection={handleDeleteSection}
+                    onactionclick={handleAddResourceToSection}
+                >
+                    <template if:true={section.hasResources}>
+                        <template for:each={section.resources} for:item="res">
+                            <c-nsf-resource-item
+                                key={res.id}
+                                resource-id={res.id}
+                                title={res.title}
+                                link={res.link}
+                                resource-type={res.type}
+                                is-bookmarked={res.isBookmarked}
+                                section-id={section.sectionId}
+                                oneditresource={handleEditResource}
+                                ontogglebookmark={handleToggleBookmark}
+                                ondeleteresource={handleConfirmDeleteResource}
+                            ></c-nsf-resource-item>
+                        </template>
+                    </template>
+                    <template if:false={section.hasResources}>
+                        <p class="empty-section-text">No resources yet. Click "Add Resource" to create one.</p>
+                    </template>
+                </c-nsf-section-card>
+            </template>
+        </template>
+
+        <!-- Empty state when no sections -->
+        <template if:false={hasSections}>
+            <div class="empty-state">
+                <lightning-icon
+                    icon-name="utility:link"
+                    size="large"
+                ></lightning-icon>
+                <p class="slds-m-top_small slds-text-color_weak">
+                    No sections yet. Click "Add Section" to get started.
+                </p>
+            </div>
+        </template>
+
+        <!-- Floating Add Section button -->
+        <lightning-button
+            label="Add Section"
+            variant="brand"
+            icon-name="utility:add"
+            onclick={handleAddSection}
+            class="add-section-btn"
+        ></lightning-button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODALS                                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Resource Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="resource-modal"
+        header={resourceModalHeader}
+        confirm-button-label="Save"
+        error-message={resourceModalError}
+        onconfirm={handleResourceConfirm}
+    >
+        <lightning-input
+            label="Resource Title"
+            value={resourceModalTitle}
+            onchange={handleResourceTitleChange}
+            required
+            class="slds-m-bottom_small"
+        ></lightning-input>
+        <lightning-input
+            type="url"
+            label="Resource Link"
+            value={resourceModalLink}
+            onchange={handleResourceLinkChange}
+            required
+            class="slds-m-bottom_small"
+        ></lightning-input>
+        <lightning-combobox
+            label="Type"
+            value={resourceModalType}
+            options={typeOptions}
+            onchange={handleResourceTypeChange}
+            class="slds-m-bottom_small"
+        ></lightning-combobox>
+        <template if:false={isEditMode}>
+            <lightning-combobox
+                label="Section"
+                value={resourceModalSectionId}
+                options={sectionOptions}
+                onchange={handleResourceSectionChange}
+                required
+            ></lightning-combobox>
+        </template>
+    </c-lwc-modal>
+
+    <!-- Section Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="section-modal"
+        header={sectionModalHeader}
+        confirm-button-label="Save"
+        error-message={sectionModalError}
+        onconfirm={handleSectionConfirm}
+    >
+        <lightning-input
+            label="Section Title"
+            value={sectionModalTitle}
+            onchange={handleSectionTitleChange}
+            required
+        ></lightning-input>
+    </c-lwc-modal>
+
+    <!-- Delete Resource Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-resource"
+        header="Delete Resource"
+        message={deleteResourceMessage}
+        onconfirm={handleDeleteResourceConfirmed}
+    ></c-nsf-confirmation-modal>
+
+    <!-- Delete Section Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-section"
+        header="Delete Section"
+        message={deleteSectionMessage}
+        onconfirm={handleConfirmDeleteSection}
+    ></c-nsf-confirmation-modal>
+</template>

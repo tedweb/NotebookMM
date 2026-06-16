@@ -1,0 +1,15 @@
+<template>
+    <div class="mode-selector">
+        <template for:each={modes} for:item="mode">
+            <button
+                key={mode.value}
+                class={mode.cssClass}
+                data-mode={mode.value}
+                onclick={handleModeClick}
+            >
+                <lightning-icon icon-name={mode.icon} size="xx-small" class="mode-icon"></lightning-icon>
+                {mode.label}
+            </button>
+        </template>
+    </div>
+</template>

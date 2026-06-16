@@ -1,0 +1,201 @@
+<template>
+    <!-- Loading spinner -->
+    <template if:true={isLoading}>
+        <div class="loading-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template if:false={isLoading}>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- HEADER BAR                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="detail-header">
+            <div class="header-left">
+                <lightning-combobox
+                    label="Section"
+                    value={selectedSectionId}
+                    options={sectionOptions}
+                    onchange={handleSectionChange}
+                    variant="label-hidden"
+                    class="section-selector"
+                ></lightning-combobox>
+                <lightning-button-icon
+                    icon-name="utility:close"
+                    alternative-text="Close section"
+                    variant="bare"
+                    size="medium"
+                    class="slds-m-left_x-small"
+                ></lightning-button-icon>
+            </div>
+            <div class="header-center">
+                <span class="card-index-label">{cardIndexLabel}</span>
+            </div>
+            <div class="header-right">
+                <lightning-button-icon
+                    icon-name="utility:add"
+                    alternative-text="Add Card"
+                    variant="border-filled"
+                    size="small"
+                    onclick={handleAdd}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:edit"
+                    alternative-text="Edit Card"
+                    variant="border-filled"
+                    size="small"
+                    onclick={handleEdit}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:sort"
+                    alternative-text="Sort Cards"
+                    variant="border-filled"
+                    size="small"
+                    onclick={handleSort}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:delete"
+                    alternative-text="Delete Card"
+                    variant="border-filled"
+                    size="small"
+                    onclick={handleDelete}
+                ></lightning-button-icon>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- FLASHCARD AREA                          -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={hasCards}>
+            <div class="card-stage">
+                <!-- Previous peek -->
+                <template if:true={hasPrevious}>
+                    <div class="peek-card peek-left" onclick={handlePrevious}>
+                        <lightning-icon
+                            icon-name="utility:chevronleft"
+                            size="small"
+                        ></lightning-icon>
+                    </div>
+                </template>
+
+                <!-- Main flashcard -->
+                <div class="card-wrapper" onclick={handleFlipCard}>
+                    <div class={cardInnerClass}>
+                        <!-- Front face -->
+                        <div class="card-face card-face-front">
+                            <div class="card-front-text">{frontText}</div>
+                        </div>
+                        <!-- Back face -->
+                        <div class="card-face card-face-back">
+                            <div class="card-back-content">
+                                <lightning-formatted-rich-text
+                                    value={backContent}
+                                ></lightning-formatted-rich-text>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next peek -->
+                <template if:true={hasNext}>
+                    <div class="peek-card peek-right" onclick={handleNext}>
+                        <lightning-icon
+                            icon-name="utility:chevronright"
+                            size="small"
+                        ></lightning-icon>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Empty state -->
+        <template if:false={hasCards}>
+            <div class="empty-state">
+                <lightning-icon
+                    icon-name="standard:task2"
+                    size="large"
+                ></lightning-icon>
+                <p class="slds-m-top_small slds-text-color_weak">
+                    No cards in this section. Click "+" to add a card.
+                </p>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- RESOURCES PANEL (toggleable)            -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={showResourcesPanel}>
+            <div class="resources-panel">
+                <h4 class="resources-panel-title">Referenced Resources</h4>
+                <template if:true={hasLinkedResources}>
+                    <template for:each={linkedResources} for:item="res">
+                        <div key={res.Id} class="resource-link-row">
+                            <lightning-icon
+                                icon-name="utility:link"
+                                size="xx-small"
+                                class="slds-m-right_x-small"
+                            ></lightning-icon>
+                            <a href={res.Link__c} target="_blank">{res.Title__c}</a>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={hasLinkedResources}>
+                    <p class="slds-text-color_weak slds-text-body_small">
+                        No resources linked to this card.
+                    </p>
+                </template>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- FOOTER BAR                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="detail-footer">
+            <div class="footer-left">
+                <lightning-button
+                    label="View Resources"
+                    variant="neutral"
+                    onclick={handleViewResources}
+                ></lightning-button>
+            </div>
+            <div class="footer-center">
+                <lightning-button-icon
+                    icon-name="utility:left"
+                    alternative-text="Previous Card"
+                    variant="border-filled"
+                    onclick={handlePrevious}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:right"
+                    alternative-text="Next Card"
+                    variant="border-filled"
+                    onclick={handleNext}
+                    class="slds-m-left_x-small"
+                ></lightning-button-icon>
+            </div>
+            <div class="footer-right">
+                <lightning-button-icon
+                    icon-name={bookmarkIcon}
+                    alternative-text="Toggle Bookmark"
+                    variant={bookmarkVariant}
+                    size="medium"
+                    onclick={handleToggleBookmark}
+                    class="slds-m-right_small"
+                ></lightning-button-icon>
+                <lightning-button
+                    label="Close"
+                    variant="brand"
+                    onclick={handleClose}
+                ></lightning-button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Delete Card Confirmation Modal -->
+    <c-nsf-confirmation-modal
+        data-id="delete-card"
+        header="Delete this card?"
+        message={deleteCardMessage}
+        onconfirm={handleConfirmDeleteCard}
+    ></c-nsf-confirmation-modal>
+</template>

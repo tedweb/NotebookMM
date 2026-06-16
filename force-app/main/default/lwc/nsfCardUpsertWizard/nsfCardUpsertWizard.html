@@ -1,0 +1,133 @@
+<template>
+    <!-- Loading spinner -->
+    <template if:true={isLoading}>
+        <div class="loading-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template if:false={isLoading}>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- WIZARD HEADER                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="wizard-header">
+            <span class="wizard-page-label">{pageLabel}</span>
+            <div class="wizard-progress">
+                <div class="progress-dot progress-dot-active"></div>
+                <div class="progress-line"></div>
+                <template if:true={isPage2}>
+                    <div class="progress-dot progress-dot-active"></div>
+                </template>
+                <template if:false={isPage2}>
+                    <template if:true={isPage3}>
+                        <div class="progress-dot progress-dot-active"></div>
+                    </template>
+                    <template if:false={isPage3}>
+                        <div class="progress-dot"></div>
+                    </template>
+                </template>
+                <div class="progress-line"></div>
+                <template if:true={isPage3}>
+                    <div class="progress-dot progress-dot-active"></div>
+                </template>
+                <template if:false={isPage3}>
+                    <div class="progress-dot"></div>
+                </template>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PAGE 1: FRONT SIDE                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={isPage1}>
+            <div class="wizard-body">
+                <div class="front-preview-area">
+                    <div class="front-text-display">{frontText}</div>
+                </div>
+                <div class="front-input-area">
+                    <lightning-textarea
+                        label="Front Side Content"
+                        value={frontText}
+                        onchange={handleFrontTextChange}
+                        placeholder="Enter the question, prompt, or term…"
+                        max-length="16448"
+                    ></lightning-textarea>
+                </div>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PAGE 2: BACK SIDE                       -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={isPage2}>
+            <div class="wizard-body">
+                <lightning-input-rich-text
+                    value={backContent}
+                    onchange={handleBackContentChange}
+                    formats={richTextFormats}
+                    placeholder="Enter the answer or definition…"
+                    class="back-editor"
+                ></lightning-input-rich-text>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PAGE 3: SUPPORTING RESOURCES            -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={isPage3}>
+            <div class="wizard-body">
+                <p class="resource-instructions slds-m-bottom_small">
+                    Add documentation resources to support this card.
+                </p>
+                <c-nsf-resource-selector
+                    notebook-id={notebookId}
+                    exclude-ids={excludeResourceIds}
+                    label="Choose resource…"
+                    onresourceselect={handleResourceSelect}
+                ></c-nsf-resource-selector>
+                <div class="slds-m-top_medium">
+                    <c-nsf-resource-sort-list
+                        resources={selectedResources}
+                        onreorder={handleResourceReorder}
+                        onremove={handleResourceRemove}
+                    ></c-nsf-resource-sort-list>
+                </div>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- WIZARD FOOTER                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="wizard-footer">
+            <lightning-button
+                label="Cancel"
+                variant="neutral"
+                onclick={handleCancel}
+            ></lightning-button>
+            <div class="footer-right-buttons">
+                <template if:true={showBackButton}>
+                    <lightning-button
+                        label="Back"
+                        variant="neutral"
+                        onclick={handleBack}
+                        class="slds-m-right_x-small"
+                    ></lightning-button>
+                </template>
+                <template if:true={showNextButton}>
+                    <lightning-button
+                        label="Next"
+                        variant="brand"
+                        onclick={handleNext}
+                    ></lightning-button>
+                </template>
+                <template if:true={showSaveButton}>
+                    <lightning-button
+                        label="Save"
+                        variant="brand"
+                        onclick={handleSave}
+                    ></lightning-button>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,43 @@
+<template>
+    <template if:true={hasNotebook}>
+        <div class="container-wrapper">
+            <!-- Header -->
+            <div class="notebook-header">
+                <lightning-icon icon-name="standard:notebook" size="medium"></lightning-icon>
+                <h1 class="notebook-title">{notebookTitle}</h1>
+            </div>
+
+            <!-- Mode Selector -->
+            <div class="mode-selector-bar">
+                <c-nsf-interaction-mode-selector
+                    active-mode={activeMode}
+                    onmodechange={handleModeChange}
+                ></c-nsf-interaction-mode-selector>
+            </div>
+
+            <!-- Active Mode Content -->
+            <div class="mode-content">
+                <template if:true={isResourcesMode}>
+                    <c-nsf-resource-list-view notebook-id={notebookId}></c-nsf-resource-list-view>
+                </template>
+                <template if:true={isNotesMode}>
+                    <c-nsf-note-list-view notebook-id={notebookId}></c-nsf-note-list-view>
+                </template>
+                <template if:true={isCardsMode}>
+                    <c-nsf-card-list-view notebook-id={notebookId}></c-nsf-card-list-view>
+                </template>
+                <template if:true={isExamsMode}>
+                    <c-nsf-exam-list-view notebook-id={notebookId}></c-nsf-exam-list-view>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={hasNotebook}>
+        <div class="empty-state">
+            <lightning-icon icon-name="utility:warning" size="large"></lightning-icon>
+            <p class="slds-text-heading_small slds-m-top_medium">No notebook selected</p>
+            <p class="slds-text-body_regular slds-text-color_weak">Open a notebook from the home page.</p>
+        </div>
+    </template>
+</template>

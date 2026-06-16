@@ -1,0 +1,83 @@
+<template>
+    <div class="topic-card">
+        <div
+            class="topic-header"
+            onmouseenter={handleTopicMouseEnter}
+            onmouseleave={handleTopicMouseLeave}
+        >
+            <h3 class="topic-title">{topicTitle}</h3>
+            <template if:true={showTopicHover}>
+                <div class="topic-hover-actions">
+                    <lightning-button-icon
+                        icon-name="utility:edit"
+                        alternative-text="Edit Topic"
+                        variant="bare"
+                        size="x-small"
+                        onclick={handleEditTopic}
+                    ></lightning-button-icon>
+                    <lightning-button-icon
+                        icon-name="utility:delete"
+                        alternative-text="Delete Topic"
+                        variant="bare"
+                        size="x-small"
+                        onclick={handleDeleteTopic}
+                    ></lightning-button-icon>
+                </div>
+            </template>
+        </div>
+        <template if:true={hasNotebooks}>
+            <ul class="notebook-list">
+                <template for:each={notebooks} for:item="nb">
+                    <li
+                        key={nb.id}
+                        class="notebook-item"
+                        data-id={nb.id}
+                        data-title={nb.title}
+                        onclick={handleOpenNotebook}
+                    >
+                        <lightning-icon
+                            icon-name="standard:notebook"
+                            size="x-small"
+                            class="notebook-icon"
+                        ></lightning-icon>
+                        <span class="notebook-title">{nb.title}</span>
+                        <div class="notebook-hover-actions">
+                            <lightning-button-icon
+                                icon-name="utility:edit"
+                                alternative-text="Edit Notebook"
+                                variant="bare"
+                                size="xx-small"
+                                data-id={nb.id}
+                                data-title={nb.title}
+                                onclick={handleEditNotebook}
+                            ></lightning-button-icon>
+                            <lightning-button-icon
+                                icon-name="utility:delete"
+                                alternative-text="Delete Notebook"
+                                variant="bare"
+                                size="xx-small"
+                                data-id={nb.id}
+                                data-title={nb.title}
+                                onclick={handleDeleteNotebook}
+                            ></lightning-button-icon>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={hasNotebooks}>
+            <p class="empty-notebooks slds-text-color_weak slds-text-body_small slds-p-vertical_x-small">
+                No notebooks yet.
+            </p>
+        </template>
+        <div class="add-notebook-container">
+            <lightning-button
+                label="Add Notebook"
+                variant="neutral"
+                icon-name="utility:add"
+                size="small"
+                onclick={handleAddNotebook}
+            ></lightning-button>
+        </div>
+    </div>
+</template>

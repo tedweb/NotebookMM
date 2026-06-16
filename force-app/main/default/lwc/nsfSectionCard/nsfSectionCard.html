@@ -1,0 +1,41 @@
+<template>
+    <div class={cardClass}>
+        <div
+            class="section-header"
+            onmouseenter={handleTitleMouseEnter}
+            onmouseleave={handleTitleMouseLeave}
+        >
+            <h3 class={titleClass}>{displayTitle}</h3>
+            <template if:true={showHoverButtons}>
+                <div class="hover-actions">
+                    <lightning-button-icon
+                        icon-name="utility:edit"
+                        alternative-text="Edit Section"
+                        variant="bare"
+                        size="small"
+                        onclick={handleEditSection}
+                    ></lightning-button-icon>
+                    <lightning-button-icon
+                        icon-name="utility:delete"
+                        alternative-text="Delete Section"
+                        variant="bare"
+                        size="small"
+                        onclick={handleDeleteSection}
+                    ></lightning-button-icon>
+                </div>
+            </template>
+        </div>
+        <div class="section-body">
+            <slot></slot>
+        </div>
+        <template if:true={showActionButton}>
+            <div class="section-footer">
+                <lightning-button
+                    label={actionButtonLabel}
+                    variant="neutral"
+                    onclick={handleActionButton}
+                ></lightning-button>
+            </div>
+        </template>
+    </div>
+</template>

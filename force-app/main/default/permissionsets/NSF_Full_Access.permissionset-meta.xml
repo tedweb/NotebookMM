@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Full access to all NotebookSF custom objects and fields.</description>
+    <label>NSF Full Access</label>
+
+    <!-- Application Visibility -->
+    <applicationVisibilities>
+        <application>NotebookSF_Console</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+
+    <!-- Tab Settings -->
+    <tabSettings>
+        <tab>NSF_Home</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>NSF_Notebook_View</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+
+    <!-- Apex Class Access -->
+    <classAccesses>
+        <apexClass>NSF_CatalogController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>NSF_SectionController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>NSF_ContentController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>NSF_BookmarkController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+
+    <!-- Object Permissions — Full CRUD + ViewAll + ModifyAll on all 13 objects -->
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Catalog__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Topic__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Notebook__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Section__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Resource__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Note__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Card__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Exam__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Resource_Note__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Resource_Card__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Resource_Exam__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Exam_Answer_Candidates__c</object>
+    </objectPermissions>
+
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+        <object>NSF_Bookmark_Listing__c</object>
+    </objectPermissions>
+
+    <!-- Field Permissions — Non-required custom fields only -->
+
+    <!-- NSF_Catalog__c — Title__c is required, no FLS needed -->
+
+    <!-- NSF_Topic__c — Title__c and NSF_CatalogId__c are required, no FLS needed -->
+
+    <!-- NSF_Notebook__c — Title__c and NSF_TopicId__c are required, no FLS needed -->
+
+    <!-- NSF_Section__c — Title__c and NSF_NotebookId__c are required, no FLS needed -->
+
+    <!-- NSF_Resource__c — Link__c and Type__c are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Resource__c.Link__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Resource__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- NSF_Note__c — Link__c and Content__c are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Note__c.Link__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Note__c.Content__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- NSF_Card__c — Front__c, Back__c, Order__c are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Card__c.Front__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Card__c.Back__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Card__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- NSF_Exam__c — Question__c, Explanation__c, and Order__c are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Exam__c.Question__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Exam__c.Explanation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Exam__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- NSF_Exam_Answer_Candidates__c — Possible_Answer__c and Is_Correct__c are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Exam_Answer_Candidates__c.Possible_Answer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Exam_Answer_Candidates__c.Is_Correct__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+    <!-- NSF_Bookmark_Listing__c — All lookups are optional -->
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Bookmark_Listing__c.NSF_SectionId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Bookmark_Listing__c.NSF_ResourceId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Bookmark_Listing__c.NSF_NoteId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Bookmark_Listing__c.NSF_CardId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>NSF_Bookmark_Listing__c.NSF_ExamId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
+</PermissionSet>

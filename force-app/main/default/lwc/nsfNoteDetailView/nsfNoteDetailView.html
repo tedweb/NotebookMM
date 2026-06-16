@@ -1,0 +1,73 @@
+<template>
+    <div class="detail-container" onkeydown={handleKeyDown}>
+        <!-- ─── Toolbar ──────────────────────────────── -->
+        <div class="detail-toolbar">
+            <div class="toolbar-left">
+                <lightning-button-icon
+                    icon-name="utility:back"
+                    alternative-text="Back to list"
+                    variant="bare"
+                    size="medium"
+                    onclick={handleBack}
+                    class="back-button"
+                ></lightning-button-icon>
+                <span class="breadcrumb-text">{breadcrumb}</span>
+            </div>
+            <div class="toolbar-right">
+                <template if:true={isDirty}>
+                    <span class="unsaved-indicator">Unsaved changes</span>
+                </template>
+                <lightning-button
+                    label={saveButtonLabel}
+                    variant={saveButtonVariant}
+                    onclick={handleSave}
+                    disabled={isSaving}
+                ></lightning-button>
+            </div>
+        </div>
+
+        <!-- ─── Loading state ────────────────────────── -->
+        <template if:true={isLoading}>
+            <div class="loading-container">
+                <lightning-spinner
+                    alternative-text="Loading note..."
+                    size="medium"
+                ></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- ─── Error state ──────────────────────────── -->
+        <template if:true={hasError}>
+            <div class="error-container">
+                <lightning-icon
+                    icon-name="utility:error"
+                    variant="error"
+                    size="small"
+                ></lightning-icon>
+                <p class="error-message">{errorMessage}</p>
+            </div>
+        </template>
+
+        <!-- ─── Rich text editor ─────────────────────── -->
+        <template if:false={isLoading}>
+            <template if:false={hasError}>
+                <div class="editor-container">
+                    <lightning-input-rich-text
+                        value={noteContent}
+                        onchange={handleContentChange}
+                        placeholder="Start writing your note..."
+                        variant="bottom-toolbar"
+                    ></lightning-input-rich-text>
+                </div>
+            </template>
+        </template>
+    </div>
+
+    <!-- ─── Unsaved changes confirmation ─────────── -->
+    <c-nsf-confirmation-modal
+        data-id="unsaved-changes"
+        header="Unsaved Changes"
+        message="You have unsaved changes. Are you sure you want to go back? Your changes will be lost."
+        onconfirm={handleConfirmDiscard}
+    ></c-nsf-confirmation-modal>
+</template>

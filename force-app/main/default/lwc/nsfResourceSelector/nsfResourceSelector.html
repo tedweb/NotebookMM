@@ -1,0 +1,16 @@
+<template>
+    <template if:true={hasOptions}>
+        <lightning-combobox
+            label={label}
+            value={selectedValue}
+            options={options}
+            onchange={handleChange}
+            placeholder="Choose resource…"
+        ></lightning-combobox>
+    </template>
+    <template if:false={hasOptions}>
+        <p class="slds-text-color_weak slds-text-body_small">
+            No resources available in this notebook.
+        </p>
+    </template>
+</template>

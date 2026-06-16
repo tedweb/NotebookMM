@@ -1,0 +1,13 @@
+:host {
+    position: relative;
+    z-index: 9001;
+}
+
+.warning-header {
+    background-color: #f9e3a3;
+    border-bottom: 1px solid #e0c66c;
+}
+
+.warning-title {
+    color: #6a4b00;
+}

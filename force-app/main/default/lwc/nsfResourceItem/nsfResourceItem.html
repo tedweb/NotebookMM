@@ -1,0 +1,35 @@
+<template>
+    <div class="resource-row" onmouseenter={handleMouseEnter} onmouseleave={handleMouseLeave}>
+        <lightning-icon
+            icon-name={typeIcon}
+            size="x-small"
+            class="type-icon"
+        ></lightning-icon>
+        <a href={link} class="resource-link" onclick={handleOpenLink}>{title}</a>
+        <template if:true={showActions}>
+            <div class="resource-actions">
+                <lightning-button-icon
+                    icon-name="utility:edit"
+                    alternative-text="Edit Resource"
+                    variant="bare"
+                    size="small"
+                    onclick={handleEdit}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name={bookmarkIcon}
+                    alternative-text="Toggle Bookmark"
+                    variant="bare"
+                    size="small"
+                    onclick={handleToggleBookmark}
+                ></lightning-button-icon>
+                <lightning-button-icon
+                    icon-name="utility:delete"
+                    alternative-text="Delete Resource"
+                    variant="bare"
+                    size="small"
+                    onclick={handleDelete}
+                ></lightning-button-icon>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,52 @@
+.card-list-container {
+    padding: 0.5rem 0;
+}
+
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+}
+
+/* ─── Deck summary inside section cards ─── */
+.deck-summary {
+    padding: 0.25rem 0;
+}
+
+.deck-count {
+    font-size: 0.875rem;
+    color: #080707;
+    margin: 0 0 0.25rem 0;
+}
+
+.deck-date {
+    font-size: 0.75rem;
+    color: #706e6b;
+    margin: 0;
+}
+
+.deck-action {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ─── Empty state ─── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    text-align: center;
+}
+
+/* ─── Add Section floating button ─── */
+.add-section-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+}

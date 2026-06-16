@@ -1,0 +1,223 @@
+<template>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- DETAIL VIEW (full-screen note editor)          -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:true={showDetailView}>
+        <c-nsf-note-detail-view
+            note-id={detailNoteId}
+            onclose={handleCloseDetail}
+        ></c-nsf-note-detail-view>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- LIST VIEW (sections + note items)              -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:false={showDetailView}>
+        <div class="note-list-container">
+
+            <!-- Bookmarked Notes Section -->
+            <template if:true={hasBookmarks}>
+                <c-nsf-section-card
+                    section-title="Bookmarked Notes"
+                    is-bookmark-section
+                >
+                    <template for:each={bookmarkedNotes} for:item="note">
+                        <div
+                            key={note.id}
+                            class="note-item"
+                            data-note-id={note.id}
+                            onmouseenter={handleNoteMouseEnter}
+                            onmouseleave={handleNoteMouseLeave}
+                        >
+                            <lightning-icon
+                                icon-name="standard:note"
+                                size="x-small"
+                                class="note-icon"
+                            ></lightning-icon>
+                            <a
+                                href="#"
+                                class="note-link"
+                                data-note-id={note.id}
+                                onclick={handleOpenNote}
+                            >
+                                {note.title}
+                            </a>
+                            <span class="note-section-label">{note.sectionTitle}</span>
+                            <template if:true={note.showEdit}>
+                                <div class="note-actions">
+                                    <lightning-button-icon
+                                        icon-name={note.bookmarkIcon}
+                                        alternative-text="Toggle Bookmark"
+                                        variant="bare"
+                                        size="small"
+                                        data-note-id={note.id}
+                                        data-section-id={note.sectionId}
+                                        onclick={handleToggleBookmark}
+                                    ></lightning-button-icon>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </c-nsf-section-card>
+            </template>
+
+            <!-- Regular Sections with Notes -->
+            <template if:true={hasSections}>
+                <template for:each={sectionsWithNotes} for:item="section">
+                    <c-nsf-section-card
+                        key={section.sectionId}
+                        section-title={section.title}
+                        section-id={section.sectionId}
+                        action-button-label="Add Note"
+                        oneditsection={handleEditSection}
+                        ondeletesection={handleDeleteSection}
+                        onactionclick={handleAddNoteToSection}
+                    >
+                        <template if:true={section.hasNotes}>
+                            <template for:each={section.notes} for:item="note">
+                                <div
+                                    key={note.id}
+                                    class="note-item"
+                                    data-note-id={note.id}
+                                    onmouseenter={handleNoteMouseEnter}
+                                    onmouseleave={handleNoteMouseLeave}
+                                >
+                                    <lightning-icon
+                                        icon-name="standard:note"
+                                        size="x-small"
+                                        class="note-icon"
+                                    ></lightning-icon>
+                                    <a
+                                        href="#"
+                                        class="note-link"
+                                        data-note-id={note.id}
+                                        onclick={handleOpenNote}
+                                    >
+                                        {note.title}
+                                    </a>
+                                    <template if:true={note.showEdit}>
+                                        <div class="note-actions">
+                                            <lightning-button-icon
+                                                icon-name={note.bookmarkIcon}
+                                                alternative-text="Toggle Bookmark"
+                                                variant="bare"
+                                                size="small"
+                                                data-note-id={note.id}
+                                                data-section-id={note.sectionId}
+                                                onclick={handleToggleBookmark}
+                                            ></lightning-button-icon>
+                                            <lightning-button-icon
+                                                icon-name="utility:edit"
+                                                alternative-text="Edit Note"
+                                                variant="bare"
+                                                size="small"
+                                                data-note-id={note.id}
+                                                data-note-title={note.title}
+                                                data-section-id={note.sectionId}
+                                                onclick={handleEditNote}
+                                            ></lightning-button-icon>
+                                            <lightning-button-icon
+                                                icon-name="utility:delete"
+                                                alternative-text="Delete Note"
+                                                variant="bare"
+                                                size="small"
+                                                data-note-id={note.id}
+                                                data-note-title={note.title}
+                                                onclick={handleDeleteNote}
+                                            ></lightning-button-icon>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={section.hasNotes}>
+                            <p class="empty-section-text">No notes yet. Click "Add Note" to create one.</p>
+                        </template>
+                    </c-nsf-section-card>
+                </template>
+            </template>
+
+            <!-- Empty state when no sections -->
+            <template if:false={hasSections}>
+                <div class="empty-state">
+                    <lightning-icon
+                        icon-name="standard:note"
+                        size="large"
+                    ></lightning-icon>
+                    <p class="slds-m-top_small slds-text-color_weak">
+                        No sections yet. Click "Add Section" to get started.
+                    </p>
+                </div>
+            </template>
+
+            <!-- Floating Add Section button -->
+            <lightning-button
+                label="Add Section"
+                variant="brand"
+                icon-name="utility:add"
+                onclick={handleAddSection}
+                class="add-section-btn"
+            ></lightning-button>
+        </div>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODALS                                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Note Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="note-modal"
+        header={noteModalHeader}
+        confirm-button-label="Save"
+        error-message={noteModalError}
+        onconfirm={handleNoteConfirm}
+    >
+        <lightning-input
+            label="Note Title"
+            value={noteModalTitle}
+            onchange={handleNoteTitleChange}
+            required
+            class="slds-m-bottom_small"
+        ></lightning-input>
+        <lightning-combobox
+            label="Section"
+            value={noteModalSectionId}
+            options={sectionOptions}
+            onchange={handleNoteSectionChange}
+            required
+        ></lightning-combobox>
+    </c-lwc-modal>
+
+    <!-- Section Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="section-modal"
+        header={sectionModalHeader}
+        confirm-button-label="Save"
+        error-message={sectionModalError}
+        onconfirm={handleSectionConfirm}
+    >
+        <lightning-input
+            label="Section Title"
+            value={sectionModalTitle}
+            onchange={handleSectionTitleChange}
+            required
+        ></lightning-input>
+    </c-lwc-modal>
+
+    <!-- Delete Note Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-note"
+        header="Delete Note"
+        message={deleteNoteMessage}
+        onconfirm={handleConfirmDeleteNote}
+    ></c-nsf-confirmation-modal>
+
+    <!-- Delete Section Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-section"
+        header="Delete Section"
+        message={deleteSectionMessage}
+        onconfirm={handleConfirmDeleteSection}
+    ></c-nsf-confirmation-modal>
+</template>

@@ -1,0 +1,47 @@
+.section-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.bookmark-section {
+    border-left: 4px solid #f2a93b;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    min-height: 2rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #080707;
+}
+
+.bookmark-title {
+    color: #b8620a;
+}
+
+.hover-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.section-body {
+    min-height: 1.5rem;
+}
+
+.section-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #f0f0f0;
+}

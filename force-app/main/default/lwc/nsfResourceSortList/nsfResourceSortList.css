@@ -1,0 +1,71 @@
+:host {
+    display: block;
+}
+
+.resource-list {
+    border: 1px solid #e5e5e5;
+    border-radius: 0.25rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.resource-row {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.resource-row:last-child {
+    border-bottom: none;
+}
+
+.resource-row:hover {
+    background-color: #f7f7f7;
+}
+
+.resource-row-selected {
+    background-color: #e8f4fd;
+    border-left: 3px solid #0070d2;
+}
+
+.drag-handle {
+    color: #b0adab;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    cursor: grab;
+    user-select: none;
+}
+
+.resource-title {
+    flex: 1;
+    font-size: 0.875rem;
+    color: #080707;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resource-link-hint {
+    font-size: 0.75rem;
+    color: #706e6b;
+    margin-left: 0.5rem;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.remove-btn {
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+
+.sort-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}

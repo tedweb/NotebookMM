@@ -1,0 +1,132 @@
+:host {
+    display: block;
+}
+
+/* ─── Loading ─────────────────────────────── */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+/* ─── Wizard header ───────────────────────── */
+.wizard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fafaf9;
+}
+
+.wizard-page-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #080707;
+}
+
+.wizard-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.progress-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d8d8d8;
+}
+
+.progress-dot-active {
+    background: #0070d2;
+}
+
+.progress-line {
+    width: 20px;
+    height: 2px;
+    background: #d8d8d8;
+}
+
+/* ─── Wizard body ─────────────────────────── */
+.wizard-body {
+    padding: 1.5rem 1rem;
+    min-height: 400px;
+}
+
+/* ─── Page 1: Question + Answers ──────────── */
+.question-input-area {
+    margin-bottom: 1.25rem;
+}
+
+.answers-section {
+    margin-top: 1rem;
+}
+
+.answers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.answers-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #080707;
+}
+
+.answer-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.5rem;
+    background: #ffffff;
+}
+
+.answer-row-correct {
+    background: #e8f5e9;
+    border-color: #4caf50;
+}
+
+.answer-input {
+    flex: 1;
+}
+
+.correct-radio {
+    flex-shrink: 0;
+}
+
+.remove-answer-btn {
+    flex-shrink: 0;
+}
+
+.explanation-area {
+    margin-top: 1.25rem;
+}
+
+/* ─── Page 2: Resources ───────────────────── */
+.resource-instructions {
+    font-size: 0.875rem;
+    color: #706e6b;
+    margin: 0;
+}
+
+/* ─── Wizard footer ───────────────────────── */
+.wizard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e5e5e5;
+    background: #fafaf9;
+}
+
+.footer-right-buttons {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,29 @@
+.resource-list-container {
+    padding: 0.5rem 0;
+}
+
+/* ─── Empty section text ──────────────────── */
+.empty-section-text {
+    color: #706e6b;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+/* ─── Empty state ─────────────────────────── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    text-align: center;
+}
+
+/* ─── Add Section floating button ─────────── */
+.add-section-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+}

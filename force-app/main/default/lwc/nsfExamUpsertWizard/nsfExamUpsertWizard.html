@@ -1,0 +1,166 @@
+<template>
+    <!-- Loading spinner -->
+    <template if:true={isLoading}>
+        <div class="loading-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template if:false={isLoading}>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- WIZARD HEADER                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="wizard-header">
+            <span class="wizard-page-label">{pageLabel}</span>
+            <div class="wizard-progress">
+                <div class="progress-dot progress-dot-active"></div>
+                <div class="progress-line"></div>
+                <template if:true={isPage2}>
+                    <div class="progress-dot progress-dot-active"></div>
+                </template>
+                <template if:false={isPage2}>
+                    <div class="progress-dot"></div>
+                </template>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PAGE 1: QUESTION & ANSWERS              -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={isPage1}>
+            <div class="wizard-body">
+                <!-- Question input -->
+                <div class="question-input-area">
+                    <lightning-textarea
+                        label="Question"
+                        value={questionText}
+                        onchange={handleQuestionChange}
+                        placeholder="Enter the exam question…"
+                        max-length="16448"
+                    ></lightning-textarea>
+                </div>
+
+                <!-- Answer candidates -->
+                <div class="answers-section">
+                    <div class="answers-header">
+                        <span class="answers-label">Answer Options</span>
+                        <template if:true={canAddAnswer}>
+                            <lightning-button-icon
+                                icon-name="utility:add"
+                                alternative-text="Add answer"
+                                variant="border-filled"
+                                size="small"
+                                onclick={handleAddAnswer}
+                            ></lightning-button-icon>
+                        </template>
+                    </div>
+
+                    <template for:each={displayAnswers} for:item="ans">
+                        <div key={ans.key} class={ans.rowClass}>
+                            <lightning-input
+                                type="radio"
+                                label="Correct"
+                                name="correctAnswer"
+                                checked={ans.isCorrect}
+                                data-index={ans.index}
+                                onchange={handleCorrectChange}
+                                variant="label-hidden"
+                                class="correct-radio"
+                            ></lightning-input>
+                            <lightning-input
+                                label={ans.label}
+                                value={ans.answer}
+                                data-index={ans.index}
+                                onchange={handleAnswerTextChange}
+                                variant="label-hidden"
+                                placeholder="Enter answer option…"
+                                class="answer-input"
+                            ></lightning-input>
+                            <template if:true={ans.showRemove}>
+                                <lightning-button-icon
+                                    icon-name="utility:close"
+                                    alternative-text="Remove answer"
+                                    variant="bare"
+                                    size="small"
+                                    data-index={ans.index}
+                                    onclick={handleRemoveAnswer}
+                                    class="remove-answer-btn"
+                                ></lightning-button-icon>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Explanation -->
+                <div class="explanation-area">
+                    <lightning-textarea
+                        label="Explanation (optional)"
+                        value={explanationText}
+                        onchange={handleExplanationChange}
+                        placeholder="Explain why the correct answer is right…"
+                        max-length="16448"
+                    ></lightning-textarea>
+                </div>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PAGE 2: SUPPORTING RESOURCES            -->
+        <!-- ═══════════════════════════════════════ -->
+        <template if:true={isPage2}>
+            <div class="wizard-body">
+                <p class="resource-instructions slds-m-bottom_small">
+                    Add documentation resources to support this question.
+                </p>
+                <c-nsf-resource-selector
+                    notebook-id={notebookId}
+                    exclude-ids={excludeResourceIds}
+                    label="Choose resource…"
+                    onresourceselect={handleResourceSelect}
+                ></c-nsf-resource-selector>
+                <div class="slds-m-top_medium">
+                    <c-nsf-resource-sort-list
+                        resources={selectedResources}
+                        onreorder={handleResourceReorder}
+                        onremove={handleResourceRemove}
+                    ></c-nsf-resource-sort-list>
+                </div>
+            </div>
+        </template>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- WIZARD FOOTER                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="wizard-footer">
+            <lightning-button
+                label="Cancel"
+                variant="neutral"
+                onclick={handleCancel}
+            ></lightning-button>
+            <div class="footer-right-buttons">
+                <template if:true={showBackButton}>
+                    <lightning-button
+                        label="Back"
+                        variant="neutral"
+                        onclick={handleBack}
+                        class="slds-m-right_x-small"
+                    ></lightning-button>
+                </template>
+                <template if:true={showNextButton}>
+                    <lightning-button
+                        label="Next"
+                        variant="brand"
+                        onclick={handleNext}
+                    ></lightning-button>
+                </template>
+                <template if:true={showSaveButton}>
+                    <lightning-button
+                        label="Save"
+                        variant="brand"
+                        onclick={handleSave}
+                    ></lightning-button>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

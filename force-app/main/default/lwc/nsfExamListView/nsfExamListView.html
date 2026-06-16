@@ -1,0 +1,144 @@
+<template>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- DETAIL VIEW (exam question carousel)           -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:true={isDetailView}>
+        <c-nsf-exam-detail-view
+            notebook-id={notebookId}
+            section-id={detailSectionId}
+            section-title={detailSectionTitle}
+            onclose={handleCloseDetail}
+            onadd={handleOpenUpsert}
+            onedit={handleOpenUpsert}
+            onsort={handleOpenSort}
+        ></c-nsf-exam-detail-view>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- UPSERT WIZARD (2-page exam create/edit)        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:true={isUpsertView}>
+        <c-nsf-exam-upsert-wizard
+            notebook-id={notebookId}
+            section-id={upsertSectionId}
+            exam-id={upsertExamId}
+            onsave={handleUpsertSave}
+            oncancel={handleUpsertCancel}
+        ></c-nsf-exam-upsert-wizard>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SORT VIEW                                       -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:true={isSortView}>
+        <c-nsf-exam-sort-view
+            section-id={detailSectionId}
+            onsave={handleSortSave}
+            oncancel={handleSortCancel}
+        ></c-nsf-exam-sort-view>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- LIST VIEW (section cards with exam summaries)  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <template if:true={isListView}>
+        <div class="exam-list-container">
+
+            <!-- Bookmarked Questions Section -->
+            <c-nsf-section-card
+                section-title="Bookmarked Questions"
+                is-bookmark-section
+                action-button-label="Open Exam"
+                onactionclick={handleOpenBookmarkExam}
+            >
+                <div class="deck-summary">
+                    <template if:true={bookmarkSummary}>
+                        <p class="deck-count">{bookmarkSummary.countLabel}</p>
+                    </template>
+                </div>
+            </c-nsf-section-card>
+
+            <!-- Regular Section Cards -->
+            <template if:true={hasSections}>
+                <div class="section-grid">
+                    <template for:each={sectionSummaries} for:item="section">
+                        <c-nsf-section-card
+                            key={section.sectionId}
+                            section-title={section.sectionTitle}
+                            section-id={section.sectionId}
+                            percentage={section.percentage}
+                            oneditsection={handleEditSection}
+                            ondeletesection={handleDeleteSection}
+                        >
+                            <div class="deck-summary">
+                                <p class="deck-count">{section.countLabel}</p>
+                                <template if:true={section.dateLabel}>
+                                    <p class="deck-date">{section.dateLabel}</p>
+                                </template>
+                            </div>
+                            <div class="deck-action">
+                                <lightning-button
+                                    label="Open Exam"
+                                    variant="neutral"
+                                    data-section-id={section.sectionId}
+                                    data-section-title={section.sectionTitle}
+                                    onclick={handleOpenExam}
+                                ></lightning-button>
+                            </div>
+                        </c-nsf-section-card>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Empty state -->
+            <template if:false={hasSections}>
+                <div class="empty-state">
+                    <lightning-icon
+                        icon-name="standard:question_feed"
+                        size="large"
+                    ></lightning-icon>
+                    <p class="slds-m-top_small slds-text-color_weak">
+                        No sections yet. Click "Add Section" to get started.
+                    </p>
+                </div>
+            </template>
+
+            <!-- Floating Add Section button -->
+            <lightning-button
+                label="Add Section"
+                variant="brand"
+                icon-name="utility:add"
+                onclick={handleAddSection}
+                class="add-section-btn"
+            ></lightning-button>
+        </div>
+    </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODALS                                          -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Section Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="section-modal"
+        header={sectionModalHeader}
+        confirm-button-label="Save"
+        error-message={sectionModalError}
+        onconfirm={handleSectionConfirm}
+    >
+        <lightning-input
+            label="Section Title"
+            value={sectionModalTitle}
+            onchange={handleSectionTitleChange}
+            required
+        ></lightning-input>
+    </c-lwc-modal>
+
+    <!-- Delete Section Confirmation -->
+    <c-nsf-confirmation-modal
+        data-id="delete-section"
+        header="Delete Section"
+        message={deleteSectionMessage}
+        onconfirm={handleConfirmDeleteSection}
+    ></c-nsf-confirmation-modal>
+</template>

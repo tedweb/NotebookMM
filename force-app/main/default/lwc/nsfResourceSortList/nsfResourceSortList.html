@@ -1,0 +1,50 @@
+<template>
+    <template if:true={hasResources}>
+        <div class="resource-list">
+            <template for:each={resources} for:item="res">
+                <div
+                    key={res.id}
+                    class={res.rowClass}
+                    data-index={res.index}
+                    onclick={handleSelectRow}
+                >
+                    <span class="drag-handle">⋮⋮</span>
+                    <span class="resource-title">{res.title}</span>
+                    <template if:true={res.link}>
+                        <span class="resource-link-hint">{res.link}</span>
+                    </template>
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        alternative-text="Remove"
+                        variant="bare"
+                        size="small"
+                        data-id={res.id}
+                        onclick={handleRemove}
+                        class="remove-btn"
+                    ></lightning-button-icon>
+                </div>
+            </template>
+        </div>
+        <div class="sort-controls">
+            <lightning-button-icon
+                icon-name="utility:up"
+                alternative-text="Move Up"
+                variant="border-filled"
+                size="small"
+                onclick={handleMoveUp}
+            ></lightning-button-icon>
+            <lightning-button-icon
+                icon-name="utility:down"
+                alternative-text="Move Down"
+                variant="border-filled"
+                size="small"
+                onclick={handleMoveDown}
+            ></lightning-button-icon>
+        </div>
+    </template>
+    <template if:false={hasResources}>
+        <p class="slds-text-color_weak slds-text-body_small slds-p-vertical_small">
+            No resources selected. Use the selector above to add resources.
+        </p>
+    </template>
+</template>

@@ -1,0 +1,45 @@
+.mode-selector {
+    display: flex;
+    gap: 0;
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #ffffff;
+    color: #706e6b;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    border-right: 1px solid #dddbda;
+}
+
+.mode-btn:last-child {
+    border-right: none;
+}
+
+.mode-btn:hover {
+    background-color: #f3f3f3;
+}
+
+.mode-btn-active {
+    background-color: #0070d2;
+    color: #ffffff;
+}
+
+.mode-btn-active:hover {
+    background-color: #005fb2;
+}
+
+.mode-icon {
+    --sds-c-icon-color-foreground-default: currentColor;
+    --sds-c-icon-color-foreground: currentColor;
+}

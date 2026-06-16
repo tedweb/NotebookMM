@@ -1,0 +1,111 @@
+:host {
+    display: block;
+}
+
+/* ─── Loading ─────────────────────────────── */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+/* ─── Wizard header ───────────────────────── */
+.wizard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e5e5;
+    background: #fafaf9;
+}
+
+.wizard-page-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #080707;
+}
+
+.wizard-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.progress-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d8d8d8;
+}
+
+.progress-dot-active {
+    background: #0070d2;
+}
+
+.progress-line {
+    width: 20px;
+    height: 2px;
+    background: #d8d8d8;
+}
+
+/* ─── Wizard body ─────────────────────────── */
+.wizard-body {
+    padding: 1.5rem 1rem;
+    min-height: 400px;
+}
+
+/* ─── Page 1: Front side preview ──────────── */
+.front-preview-area {
+    border: 2px solid #d8d8d8;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.front-text-display {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 500;
+    color: #080707;
+    line-height: 1.3;
+    word-wrap: break-word;
+    max-height: 100%;
+}
+
+.front-input-area {
+    margin-top: 0.75rem;
+}
+
+/* ─── Page 2: Back side editor ────────────── */
+.back-editor {
+    min-height: 350px;
+}
+
+/* ─── Page 3: Resources ───────────────────── */
+.resource-instructions {
+    font-size: 0.875rem;
+    color: #706e6b;
+    margin: 0;
+}
+
+/* ─── Wizard footer ───────────────────────── */
+.wizard-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e5e5e5;
+    background: #fafaf9;
+}
+
+.footer-right-buttons {
+    display: flex;
+    align-items: center;
+}

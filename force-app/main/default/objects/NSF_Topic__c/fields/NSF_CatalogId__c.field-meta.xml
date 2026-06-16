@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NSF_CatalogId__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Catalog</label>
+    <referenceTo>NSF_Catalog__c</referenceTo>
+    <relationshipLabel>Topics</relationshipLabel>
+    <relationshipName>Topics</relationshipName>
+    <required>true</required>
+    <type>Lookup</type>
+</CustomField>
