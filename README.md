@@ -37,6 +37,7 @@ force-app/main/default/
 ├── tabs/                   # Custom tabs
 ├── applications/           # Custom app definition
 ├── flexipages/             # Lightning page layouts
+├── staticresources/        # images etc.
 └── permissionsets/         # Permission set for access control
 ```
 
@@ -47,6 +48,21 @@ Deploy to a Salesforce org using the Salesforce CLI:
 ```bash
 sf project deploy start --target-org <your-org-alias>
 ```
+
+Deployment Order:
+```
+force-app/main/default/
+├── objects/                # 1
+├── classes/                # 2
+├── staticresources/        # 3
+├── lwc/                    # 4
+├── flexipages/             # 5
+├── tabs/                   # 6
+├── applications/           # 7
+└── permissionsets/         # 8
+```
+
+
 
 ## License
 
