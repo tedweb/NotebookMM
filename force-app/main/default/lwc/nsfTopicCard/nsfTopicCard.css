@@ -105,7 +105,7 @@
 .add-topic-btn {
     /* background: white; */
     /* color: #999999; */
-    border: 1px solid rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     padding: 0.35rem 0.75rem;
     font-size: 0.75rem;
@@ -120,6 +120,6 @@
 }
 
 .add-notebook-icon {
-    --sds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.7);
-    flex-shrink: 0;
+    --sds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.5);
+    margin: 0 5px 2px 0;
 }
