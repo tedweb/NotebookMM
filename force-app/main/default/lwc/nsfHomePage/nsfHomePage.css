@@ -71,5 +71,24 @@
     bottom: 1.5rem;
     right: 1.5rem;
     z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     background-color: #1B2A4A;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+
+.add-topic-btn:hover {
+    background-color: #253a5e;
+}
+
+.add-topic-icon {
+    --slds-c-icon-color-foreground-default: #ffffff;
 }
