@@ -98,7 +98,7 @@
 }
 
 .add-catalog-icon {
-    --sds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.7);
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.7);
     flex-shrink: 0;
 }
 
