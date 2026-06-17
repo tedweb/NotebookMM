@@ -37,11 +37,11 @@
                         data-title={nb.title}
                         onclick={handleOpenNotebook}
                     >
-                        <lightning-icon
-                            icon-name="standard:notebook"
-                            size="x-small"
-                            class="notebook-icon"
-                        ></lightning-icon>
+                        <img
+                            src={notebookIconUrl}
+                            alt="Notebook"
+                            class="notebook-icon-img"
+                        >
                         <span class="notebook-title">{nb.title}</span>
                         <div class="notebook-hover-actions">
                             <lightning-button-icon

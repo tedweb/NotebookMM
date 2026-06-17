@@ -1,8 +1,10 @@
 import { LightningElement, api } from 'lwc';
+import NOTEBOOK_ICON from '@salesforce/resourceUrl/notebook_icon';
 
 export default class NsfTopicCard extends LightningElement {
     @api topic = {};
 
+    notebookIconUrl = NOTEBOOK_ICON;
     _showTopicHover = false;
 
     get topicTitle() {
