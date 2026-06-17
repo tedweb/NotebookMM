@@ -71,9 +71,5 @@
     bottom: 1.5rem;
     right: 1.5rem;
     z-index: 100;
-}
-
-.add-topic-icon {
-    --slds-c-icon-color-foreground: rgba(255, 255, 255, 0.9);
-    --slds-c-icon-color-foreground-hover: rgba(255, 255, 255, 1);
+    background-color: #1B2A4A;
 }

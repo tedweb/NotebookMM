@@ -55,10 +55,13 @@
 
             <!-- Floating Add Topic button -->
             <template if:true={selectedCatalogId}>
-                <div class="add-topic-btn" role="button" tabindex="0" onclick={handleAddTopic} onkeydown={handleAddTopicKeydown}>
-                    <lightning-icon icon-name="utility:add" size="xx-small" class="add-topic-icon"></lightning-icon>
-                    <span>Add Topic</span>
-                </div>
+                <lightning-button
+                    label="Add Topic"
+                    variant="brand"
+                    icon-name="utility:add"
+                    onclick={handleAddTopic}
+                    class="add-topic-btn"
+                ></lightning-button>
             </template>
         </div>
     </div>
