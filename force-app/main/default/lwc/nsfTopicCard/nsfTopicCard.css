@@ -96,15 +96,16 @@
 }
 
 .add-notebook-container {
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     padding-top: 0.5rem;
-    border-top: 1px solid #f0f0f0;
+    /* border-top: 1px solid #f0f0f0; */
+    text-align: end;
 }
 
 .add-topic-btn {
     /* background: white; */
-    color: #999999;
-    border: 1px solid #999999;
+    /* color: #999999; */
+    border: 1px solid rgba(0, 0, 0, 0.7);
     border-radius: 15px;
     padding: 0.35rem 0.75rem;
     font-size: 0.75rem;
@@ -114,4 +115,6 @@
     box-shadow: none;
     min-width: 60px;
     margin-left: 1em;
+    background-color: inherit;
+    color: rgba(0, 0, 0, 0.7);
 }
