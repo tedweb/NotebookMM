@@ -44,11 +44,21 @@
                         Create a topic to start organizing your notebooks.
                     </p>
                     <template if:true={selectedCatalogId}>
-                        <lightning-button
+                        <!-- <lightning-button
                             label="Add Topic"
                             variant="brand-outline"
                             onclick={handleAddTopic}
-                        ></lightning-button>
+                        ></lightning-button> -->
+                        <div
+                            class="add-topic-btn"
+                            role="button"
+                            tabindex="0"
+                            onclick={handleAddTopic}
+                            onkeydown={handleAddTopicKeydown}
+                        >
+                            <lightning-icon icon-name="utility:add" size="xx-small" class="add-topic-icon"></lightning-icon>
+                            Add Topic
+                        </div>
                     </template>
                 </div>
             </template>
