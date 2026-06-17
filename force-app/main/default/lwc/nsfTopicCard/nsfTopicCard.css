@@ -116,20 +116,25 @@
 }
 
 .add-topic-btn {
-    /* background: white; */
-    /* color: #999999; */
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    --slds-c-button-brand-color-background: #1B2A4A;
+    --slds-c-button-brand-color-border: #1B2A4A;
+    --slds-c-button-brand-color-background-hover: #152238;
+    --slds-c-button-brand-color-border-hover: #152238;
+    --slds-c-button-neutral-color-background: #1B2A4A;
+    --slds-c-button-neutral-color-border: #1B2A4A;
+    --slds-c-button-color-background: #1B2A4A;
+    --slds-c-button-color-border: #1B2A4A;
+    border: 1px solid #1B2A4A;
     border-radius: 15px;
     padding: 0.35rem 0.75rem;
     font-size: 0.75rem;
     font-weight: 200;
     cursor: pointer;
-    /* transition: all 0.2s ease-in-out; */
     box-shadow: none;
     min-width: 60px;
     margin-left: 1em;
-    background-color: inherit;
-    color: rgba(0, 0, 0, 0.7);
+    background-color: #1B2A4A;
+    color: #ffffff;
 }
 
 .add-notebook-icon {
