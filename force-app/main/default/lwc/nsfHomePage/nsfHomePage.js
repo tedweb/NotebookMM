@@ -194,6 +194,13 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.template.querySelector('c-lwc-modal[data-id="topic-modal"]').open();
     }
 
+    handleAddTopicKeydown(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            this.handleAddTopic();
+        }
+    }
+
     handleEditTopic(event) {
         this.topicModalHeader = 'Edit Topic';
         this.topicModalTitle = event.detail.topicTitle;
