@@ -9,17 +9,19 @@
             <template if:true={showTopicHover}>
                 <div class="topic-hover-actions">
                     <lightning-button-icon
+                        class="custom-icon-color"
                         icon-name="utility:edit"
                         alternative-text="Edit Topic"
                         variant="bare"
-                        size="x-small"
+                        size="medium"
                         onclick={handleEditTopic}
                     ></lightning-button-icon>
                     <lightning-button-icon
+                        class="custom-icon-color"
                         icon-name="utility:delete"
                         alternative-text="Delete Topic"
                         variant="bare"
-                        size="x-small"
+                        size="medium"
                         onclick={handleDeleteTopic}
                     ></lightning-button-icon>
                 </div>
@@ -43,19 +45,21 @@
                         <span class="notebook-title">{nb.title}</span>
                         <div class="notebook-hover-actions">
                             <lightning-button-icon
+                                class="custom-icon-color"
                                 icon-name="utility:edit"
                                 alternative-text="Edit Notebook"
                                 variant="bare"
-                                size="xx-small"
+                                size="medium"
                                 data-id={nb.id}
                                 data-title={nb.title}
                                 onclick={handleEditNotebook}
                             ></lightning-button-icon>
                             <lightning-button-icon
+                                class="custom-icon-color"
                                 icon-name="utility:delete"
                                 alternative-text="Delete Notebook"
                                 variant="bare"
-                                size="xx-small"
+                                size="medium"
                                 data-id={nb.id}
                                 data-title={nb.title}
                                 onclick={handleDeleteNotebook}
@@ -75,13 +79,6 @@
               <lightning-icon icon-name="utility:add" size="xx-small" class="add-notebook-icon"></lightning-icon>
               Add Notebook
             </button>
-            <!-- <lightning-button
-                label="Add Notebook"
-                variant="neutral"
-                icon-name="utility:add"
-                size="small"
-                onclick={handleAddNotebook}
-            ></lightning-button> -->
         </div>
     </div>
 </template>

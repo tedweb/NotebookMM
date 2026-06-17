@@ -69,13 +69,9 @@
     flex-shrink: 0;
 }
 
-.catalog-hover-actions lightning-button-icon {
-    --sds-c-button-text-color: #ffffff;
-    --sds-c-button-text-color-hover: #b0c4de;
-}
-
 .catalog-item:hover .catalog-hover-actions {
     display: flex;
+    column-gap: 0.35rem;
 }
 
 .sidebar-spacer {
@@ -96,7 +92,7 @@
 }
 
 .add-catalog-item:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.2);
     color: #ffffff;
 }
 
