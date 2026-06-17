@@ -1,5 +1,6 @@
 <template>
     <div class="sidebar-container">
+        <div class="sidebar-header">Topic Groups</div>
         <template if:true={hasCatalogs}>
             <ul class="catalog-list">
                 <template for:each={catalogItems} for:item="cat">
@@ -13,7 +14,7 @@
                         <div class="catalog-hover-actions">
                             <lightning-button-icon
                                 icon-name="utility:edit"
-                                alternative-text="Edit Catalog"
+                                alternative-text="Edit Name"
                                 variant="bare"
                                 size="x-small"
                                 data-id={cat.id}
@@ -22,7 +23,7 @@
                             ></lightning-button-icon>
                             <lightning-button-icon
                                 icon-name="utility:delete"
-                                alternative-text="Delete Catalog"
+                                alternative-text="Delete Group"
                                 variant="bare"
                                 size="x-small"
                                 data-id={cat.id}
@@ -42,7 +43,7 @@
         <div class="sidebar-spacer"></div>
         <div class="add-catalog-item" onclick={handleAddCatalog} role="button" tabindex="0" onkeydown={handleAddCatalogKeydown}>
             <lightning-icon icon-name="utility:add" size="xx-small" class="add-catalog-icon"></lightning-icon>
-            <span class="add-catalog-label">Add Catalog</span>
+            <span class="add-catalog-label">Add Topic Group</span>
         </div>
     </div>
 </template>
