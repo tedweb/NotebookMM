@@ -12,6 +12,11 @@
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
 }
 
+.topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
 .topic-header {
     display: flex;
     align-items: center;
@@ -21,9 +26,9 @@
 }
 
 .topic-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #080707;
+    font-size: 1.2rem;
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.7);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
