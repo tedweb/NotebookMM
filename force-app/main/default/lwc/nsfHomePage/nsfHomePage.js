@@ -116,6 +116,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.catalogModalId = null;
         this.catalogModalError = '';
         this.template.querySelector('c-lwc-modal[data-id="catalog-modal"]').open();
+        this._focusModalInput('catalog-modal');
     }
 
     handleEditCatalog(event) {
@@ -124,6 +125,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.catalogModalId = event.detail.catalogId;
         this.catalogModalError = '';
         this.template.querySelector('c-lwc-modal[data-id="catalog-modal"]').open();
+        this._focusModalInput('catalog-modal');
     }
 
     handleCatalogTitleChange(event) {
@@ -199,6 +201,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.topicModalCatalogId = this.selectedCatalogId;
         this.topicModalError = '';
         this.template.querySelector('c-lwc-modal[data-id="topic-modal"]').open();
+        this._focusModalInput('topic-modal');
     }
 
     handleEditTopic(event) {
@@ -208,6 +211,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.topicModalCatalogId = this.selectedCatalogId;
         this.topicModalError = '';
         this.template.querySelector('c-lwc-modal[data-id="topic-modal"]').open();
+        this._focusModalInput('topic-modal');
     }
 
     handleTopicTitleChange(event) {
@@ -279,6 +283,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.template
             .querySelector('c-lwc-modal[data-id="notebook-modal"]')
             .open();
+        this._focusModalInput('notebook-modal');
     }
 
     handleEditNotebook(event) {
@@ -290,6 +295,7 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
         this.template
             .querySelector('c-lwc-modal[data-id="notebook-modal"]')
             .open();
+        this._focusModalInput('notebook-modal');
     }
 
     handleNotebookTitleChange(event) {
@@ -398,6 +404,21 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
     // ═══════════════════════════════════════════════════════
     // HELPERS
     // ═══════════════════════════════════════════════════════
+
+    _focusModalInput(modalDataId) {
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        setTimeout(() => {
+            const modal = this.template.querySelector(
+                `c-lwc-modal[data-id="${modalDataId}"]`
+            );
+            if (modal) {
+                const input = modal.querySelector('lightning-input');
+                if (input) {
+                    input.focus();
+                }
+            }
+        }, 150);
+    }
 
     showSuccess(message) {
         this.dispatchEvent(
