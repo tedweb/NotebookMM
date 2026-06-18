@@ -33,6 +33,7 @@ NotebookSF lets users organize knowledge into **Catalogs → Topics → Notebook
 force-app/main/default/
 ├── lwc/                    # 21 Lightning Web Components
 ├── classes/                # Apex controllers + test classes
+├── documents/              # Custom icons, etc.
 ├── objects/                # 13 custom objects with fields & relationships
 ├── tabs/                   # Custom tabs
 ├── applications/           # Custom app definition
@@ -55,11 +56,12 @@ force-app/main/default/
 ├── objects/                # 1
 ├── classes/                # 2
 ├── staticresources/        # 3
-├── lwc/                    # 4
-├── flexipages/             # 5
-├── tabs/                   # 6
-├── applications/           # 7
-└── permissionsets/         # 8
+├── documents/.             # 4
+├── lwc/                    # 5
+├── flexipages/             # 6
+├── tabs/                   # 7
+├── applications/           # 8
+└── permissionsets/         # 9
 ```
 
 
