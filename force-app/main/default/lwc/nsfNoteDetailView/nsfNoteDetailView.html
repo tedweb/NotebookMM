@@ -41,7 +41,7 @@
         <!-- ─── Toolbar ──────────────────────────────── -->
         <div class="detail-toolbar">
             <div class="toolbar-left">
-                <lightning-button-icon
+                <!-- <lightning-button-icon
                     icon-name="utility:back"
                     alternative-text="Back to list"
                     variant="bare"
@@ -49,18 +49,28 @@
                     onclick={handleBack}
                     class="back-button"
                 ></lightning-button-icon>
-                <span class="breadcrumb-text">{breadcrumb}</span>
+                <span class="breadcrumb-text">{breadcrumb}</span> -->
             </div>
             <div class="toolbar-right">
                 <template if:true={isDirty}>
                     <span class="unsaved-indicator">Unsaved changes</span>
                 </template>
-                <lightning-button
-                    label={saveButtonLabel}
-                    variant={saveButtonVariant}
+                <div
+                    class="action-btn"
+                    role="button"
+                    tabindex="0"
                     onclick={handleSave}
-                    disabled={isSaving}
-                ></lightning-button>
+                >
+                    Save
+                </div>
+                <div
+                    class="action-btn"
+                    role="button"
+                    tabindex="0"
+                    onclick={handleBack}
+                >
+                    Close
+                </div>
             </div>
         </div>
     </div>

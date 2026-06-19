@@ -3,6 +3,7 @@
     flex-direction: column;
     flex: 1;
     height: 100%;
+    background-color: #ffffff;
 }
 
 .detail-container {
@@ -19,8 +20,8 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     background-color: #ffffff;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
     flex-shrink: 0;
 }
 
@@ -34,7 +35,7 @@
 .toolbar-right {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.35rem;
     flex-shrink: 0;
 }
 
@@ -120,4 +121,18 @@
     outline: none;
     box-shadow: none;
     border: none;
+}
+
+.action-btn {
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #0070d2;
+    padding: 0.3rem 1rem;;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
 }
