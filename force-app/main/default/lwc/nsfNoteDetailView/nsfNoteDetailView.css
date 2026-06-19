@@ -19,6 +19,7 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     background-color: #ffffff;
+    border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
     flex-shrink: 0;
 }
@@ -83,12 +84,22 @@
 /* ─── Editor ─────────────────────────────────── */
 .editor-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     /* padding: 0.75rem 1rem; */
     overflow-y: auto;
     min-height: 0;
 }
 
 .rich-text-editor {
+    /* Fill all available vertical space */
+    flex: 1;
+    min-height: 0;
+
+    /* Remove the 240 px max-height cap on the inner editable area
+       so it can grow with the flex container */
+    --slds-c-textarea-sizing-max-height: none;
+
     /* Override global SLDS tokens that control the border */
     --lwc-borderWidthThin: 0px;
     --slds-g-color-border-1: transparent;

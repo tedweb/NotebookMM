@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NotebookSF — User's Guide</title>
+<script src="https://assets.meshmesh.io/system/tailwindcss-browser-4.js"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-primary: #0176D3;
+  --color-primary-dark: #014486;
+  --color-secondary: #1B5297;
+  --color-accent: #FF6600;
+  --color-success: #2E844A;
+  --color-warning: #DD7A01;
+  --color-error: #C23934;
+  --color-surface: #F3F3F3;
+  --color-card: #FFFFFF;
+  --color-text: #181818;
+  --color-text-muted: #706E6B;
+  --color-border: #DDDBDA;
+  --color-highlight: #EAF5FE;
+}
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Salesforce+Sans:wght@300;400;500;700&display=swap');
+html { scroll-behavior: smooth; }
+body { font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.toc-link { transition: color 0.15s, padding-left 0.15s; }
+.toc-link:hover { padding-left: 0.5rem; color: #0176D3; }
+.step-number { counter-increment: step-counter; }
+.step-number::before { content: counter(step-counter); }
+.card-flip-demo { perspective: 600px; }
+.card-flip-inner { transition: transform 0.5s; transform-style: preserve-3d; }
+.card-flip-demo:hover .card-flip-inner { transform: rotateY(180deg); }
+.card-flip-front, .card-flip-back { backface-visibility: hidden; }
+.card-flip-back { transform: rotateY(180deg); }
+</style>
+</head>
+<body class="bg-surface text-text">
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  HERO / COVER                                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<header class="bg-gradient-to-r from-primary-dark to-primary text-white">
+  <div class="max-w-5xl mx-auto px-6 py-16 flex flex-col items-center text-center gap-4">
+    <!-- Inline SVG icon -->
+    <svg class="w-16 h-16 text-white/90" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="6" width="36" height="40" rx="3" fill="white" fill-opacity="0.15" stroke="currentColor" stroke-width="2"/>
+      <rect x="13" y="6" width="31" height="40" rx="3" fill="white" fill-opacity="0.25" stroke="currentColor" stroke-width="2"/>
+      <rect x="18" y="6" width="26" height="40" rx="3" fill="white" fill-opacity="0.9" stroke="currentColor" stroke-width="2"/>
+      <line x1="23" y1="16" x2="39" y2="16" stroke="#0176D3" stroke-width="2" stroke-linecap="round"/>
+      <line x1="23" y1="22" x2="37" y2="22" stroke="#0176D3" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      <line x1="23" y1="28" x2="35" y2="28" stroke="#0176D3" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      <line x1="23" y1="34" x2="33" y2="34" stroke="#0176D3" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+    </svg>
+    <h1 class="text-4xl font-bold tracking-tight">NotebookSF</h1>
+    <p class="text-xl text-white/80 font-light">User's Guide — Library of Knowledge</p>
+    <span class="mt-2 inline-block bg-white/20 text-white text-xs font-medium px-3 py-1 rounded-full tracking-wide uppercase">Version 1.0</span>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-10">
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  TABLE OF CONTENTS                                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<nav class="bg-card rounded-xl border border-border shadow-sm p-8 mb-12">
+  <h2 class="text-lg font-bold text-primary-dark mb-5 uppercase tracking-wider flex items-center gap-2">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/></svg>
+    Table of Contents
+  </h2>
+  <div class="grid md:grid-cols-2 gap-x-10 gap-y-2 text-[15px]">
+    <a href="#getting-started" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">1. Getting Started</a>
+    <a href="#home-page" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">2. Application Home Page</a>
+    <a href="#interaction-overview" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">3. Interaction Modes Overview</a>
+    <a href="#resources-mode" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">4. Resources Mode</a>
+    <a href="#notes-mode" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">5. Notes Mode</a>
+    <a href="#cards-mode" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">6. Cards (Flashcards) Mode</a>
+    <a href="#exams-mode" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">7. Exams Mode</a>
+    <a href="#bookmarks" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">8. Bookmarks</a>
+    <a href="#agent-sparky" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">9. Agent Sparky (AI Chat)</a>
+    <a href="#tips" class="toc-link text-text-muted hover:text-primary block py-1 border-b border-border/50">10. Tips &amp; Keyboard Shortcuts</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 1 — GETTING STARTED                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="getting-started" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">1</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Getting Started</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">What is NotebookSF?</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">
+      NotebookSF is a research and note-taking assistant — a <strong class="text-text">Library of Knowledge (LoK)</strong> — built natively on the Salesforce Platform. It helps you organize knowledge in a hierarchical fashion, similar to how a real library organizes books. Instead of flat notes scattered across folders, NotebookSF structures your learning materials into a clean hierarchy that prevents clutter and makes information easy to find.
+    </p>
+    <p class="text-[15px] leading-relaxed text-text-muted">
+      Think of it as your personal Salesforce-native study hub: save reference links, write rich-text notes, study with flashcards, and test yourself with practice exams — all in one place with AI-powered assistance.
+    </p>
+  </div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">The Library Analogy</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-5">NotebookSF mirrors the way a real library is organized. Here's how the hierarchy works:</p>
+    <!-- Hierarchy visual -->
+    <div class="flex flex-col items-center gap-0">
+      <!-- Catalogs -->
+      <div class="bg-primary-dark text-white rounded-lg px-6 py-3 text-center shadow-md">
+        <div class="font-bold text-sm">📚 Catalogs</div>
+        <div class="text-xs text-white/70 mt-0.5">Top-level collections (e.g., "Technical Stuff")</div>
+      </div>
+      <div class="w-0.5 h-5 bg-primary/40"></div>
+      <svg class="w-4 h-3 text-primary/40" viewBox="0 0 16 12" fill="currentColor"><path d="M8 12L0 0h16z"/></svg>
+      <!-- Topics -->
+      <div class="bg-secondary text-white rounded-lg px-6 py-3 text-center shadow-md mt-1">
+        <div class="font-bold text-sm">📂 Topics</div>
+        <div class="text-xs text-white/70 mt-0.5">Subject areas (e.g., "Analytics", "Security")</div>
+      </div>
+      <div class="w-0.5 h-5 bg-primary/40"></div>
+      <svg class="w-4 h-3 text-primary/40" viewBox="0 0 16 12" fill="currentColor"><path d="M8 12L0 0h16z"/></svg>
+      <!-- Notebooks -->
+      <div class="bg-primary text-white rounded-lg px-6 py-3 text-center shadow-md mt-1">
+        <div class="font-bold text-sm">📓 Notebooks</div>
+        <div class="text-xs text-white/70 mt-0.5">Study workspaces (e.g., "Einstein Analytics")</div>
+      </div>
+      <div class="w-0.5 h-5 bg-primary/40"></div>
+      <svg class="w-4 h-3 text-primary/40" viewBox="0 0 16 12" fill="currentColor"><path d="M8 12L0 0h16z"/></svg>
+      <!-- Sections -->
+      <div class="bg-highlight text-primary-dark border-2 border-primary/30 rounded-lg px-6 py-3 text-center shadow-md mt-1">
+        <div class="font-bold text-sm">📑 Sections</div>
+        <div class="text-xs text-text-muted mt-0.5">Groups within a notebook (e.g., "Prompt Builder")</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Accessing the Application</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">
+      NotebookSF runs as a Lightning Console Application called <strong class="text-text">Notebook Console</strong>. To access it:
+    </p>
+    <ol class="space-y-3 text-[15px]" style="counter-reset: step-counter;">
+      <li class="flex gap-3 items-start">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold step-number"></span>
+        <span class="text-text-muted">Open the <strong class="text-text">App Launcher</strong> (the grid icon in the top-left of your Salesforce org).</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold step-number"></span>
+        <span class="text-text-muted">Search for <strong class="text-text">"Notebook Console"</strong> and select it.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold step-number"></span>
+        <span class="text-text-muted">The Application Home Page will load, displaying your Catalogs in the left sidebar and Topic cards in the main area.</span>
+      </li>
+    </ol>
+    <!-- Tip callout -->
+    <div class="mt-5 bg-highlight border-l-4 border-primary rounded-r-lg p-4 flex gap-3 items-start">
+      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+      <p class="text-sm text-secondary"><strong>Tip:</strong> NotebookSF uses a console-style layout. When you open a notebook, it appears as a new tab — allowing you to switch quickly between notebooks and the home page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 2 — APPLICATION HOME PAGE                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="home-page" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">2</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Application Home Page</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">The Home Page is your starting point. It consists of two main areas: the <strong class="text-text">Catalog Sidebar</strong> on the left and the <strong class="text-text">Topic Cards</strong> grid in the center.</p>
+
+  <!-- Catalog Sidebar -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Catalog Sidebar</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The sidebar displays all your Catalogs as a vertical navigation list. Click any catalog name to load its associated topics in the main area.</p>
+
+    <h4 class="font-medium text-sm text-text uppercase tracking-wider mb-3 mt-5">Managing Catalogs</h4>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-success/10 text-success flex items-center justify-center text-xs">+</span>
+          <span class="font-medium text-sm text-text">Create Catalog</span>
+        </div>
+        <p class="text-xs text-text-muted">Click the <strong>"Add Catalog"</strong> button at the bottom of the sidebar. Enter a name in the modal and click <strong>Create</strong>.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-primary/10 text-primary flex items-center justify-center text-xs">✎</span>
+          <span class="font-medium text-sm text-text">Edit Catalog</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a catalog name to reveal the edit icon. Click it to rename the catalog via the edit modal.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-error/10 text-error flex items-center justify-center text-xs">✕</span>
+          <span class="font-medium text-sm text-text">Delete Catalog</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a catalog name to reveal the delete icon. Available only if the catalog contains <strong>no topics</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Topic Cards -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Topic Cards</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">When you select a catalog, the main area displays <strong class="text-text">Topic Cards</strong> arranged in a columnar layout. Each Topic Card shows the topic's title and a list of its Notebooks (displayed as clickable links).</p>
+
+    <h4 class="font-medium text-sm text-text uppercase tracking-wider mb-3 mt-5">Managing Topics</h4>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-success/10 text-success flex items-center justify-center text-xs">+</span>
+          <span class="font-medium text-sm text-text">Create Topic</span>
+        </div>
+        <p class="text-xs text-text-muted">Click the <strong>"Add Topic"</strong> floating button in the bottom-right corner. Enter a name and select a parent catalog.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-primary/10 text-primary flex items-center justify-center text-xs">✎</span>
+          <span class="font-medium text-sm text-text">Edit / Reparent Topic</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a topic card title to reveal the edit icon. Rename it or move it to a different catalog.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-error/10 text-error flex items-center justify-center text-xs">✕</span>
+          <span class="font-medium text-sm text-text">Delete Topic</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a topic card title to reveal the delete icon. Available only if the topic contains <strong>no notebooks</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notebooks -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Managing Notebooks</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">Notebooks appear as clickable links inside each Topic Card. They are your primary study workspaces.</p>
+
+    <div class="grid md:grid-cols-3 gap-4 mb-5">
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-success/10 text-success flex items-center justify-center text-xs">+</span>
+          <span class="font-medium text-sm text-text">Create Notebook</span>
+        </div>
+        <p class="text-xs text-text-muted">Click <strong>"Add Notebook"</strong> at the bottom of any Topic Card. Enter a name and select its parent topic.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-primary/10 text-primary flex items-center justify-center text-xs">✎</span>
+          <span class="font-medium text-sm text-text">Edit / Reparent Notebook</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a notebook link to reveal the edit icon. Rename it or move it to a different topic.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-5 h-5 rounded bg-error/10 text-error flex items-center justify-center text-xs">✕</span>
+          <span class="font-medium text-sm text-text">Delete Notebook</span>
+        </div>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a notebook link to reveal the delete icon. <strong>Warning:</strong> All contents will be deleted.</p>
+      </div>
+    </div>
+
+    <div class="bg-highlight border-l-4 border-primary rounded-r-lg p-4 flex gap-3 items-start">
+      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+      <p class="text-sm text-secondary"><strong>Opening a Notebook:</strong> Click any notebook title link to open it in a new console tab. The notebook will default to the <strong>Resources</strong> interaction mode.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 3 — INTERACTION MODES OVERVIEW             -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="interaction-overview" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">3</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Interaction Modes Overview</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">Once inside a notebook, you have access to four specialized <strong class="text-text">Interaction Modes</strong> — each designed for a different type of learning activity. Switch between them using the mode selector buttons near the top of the page.</p>
+
+  <div class="grid md:grid-cols-2 gap-5 mb-6">
+    <div class="bg-card rounded-xl border border-border shadow-sm p-5 flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold text-text mb-1">Resources</h3>
+        <p class="text-sm text-text-muted">Save and organize external URL links — web pages, PDFs, and videos — for quick reference.</p>
+      </div>
+    </div>
+    <div class="bg-card rounded-xl border border-border shadow-sm p-5 flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold text-text mb-1">Notes</h3>
+        <p class="text-sm text-text-muted">Create rich-text notes with full formatting. Write summaries, key takeaways, and study materials.</p>
+      </div>
+    </div>
+    <div class="bg-card rounded-xl border border-border shadow-sm p-5 flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold text-text mb-1">Cards (Flashcards)</h3>
+        <p class="text-sm text-text-muted">Two-sided flashcards for active recall. Flip them to study, link supporting resources, and sort them in any order.</p>
+      </div>
+    </div>
+    <div class="bg-card rounded-xl border border-border shadow-sm p-5 flex gap-4 items-start">
+      <div class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold text-text mb-1">Exams</h3>
+        <p class="text-sm text-text-muted">Multiple-choice practice questions with explanations. Test your knowledge and review supporting resources.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Layout -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Shared Layout Elements</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">All interaction modes share a consistent layout:</p>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-surface border-2 border-border flex items-center justify-center mb-2">
+          <svg class="w-5 h-5 text-text-muted" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"/></svg>
+        </div>
+        <h4 class="font-medium text-sm text-text mb-1">Section Cards</h4>
+        <p class="text-xs text-text-muted">Items are organized into Section Cards displayed in columns. Each card has a title, items, and action buttons.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-surface border-2 border-border flex items-center justify-center mb-2">
+          <svg class="w-5 h-5 text-warning" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <h4 class="font-medium text-sm text-text mb-1">Bookmarked Section</h4>
+        <p class="text-xs text-text-muted">A special section card at the top of every list view showing all bookmarked items for quick access.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-surface border-2 border-border flex items-center justify-center mb-2">
+          <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/></svg>
+        </div>
+        <h4 class="font-medium text-sm text-text mb-1">Agent Sparky Panel</h4>
+        <p class="text-xs text-text-muted">An AI chat assistant on the right side of the page, always available to help you search and find information.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 4 — RESOURCES MODE                         -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="resources-mode" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">4</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Resources Mode</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">Resources Mode lets you collect and organize external references — web links, PDFs, and videos — organized by section. Each resource is a clickable item that opens its URL in a new browser tab.</p>
+
+  <!-- List View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">List View</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The Resources List View displays Section Cards arranged in columns. Each card shows the section title, a percentage indicator, and a list of resource items with their titles and link icons.</p>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-2"><strong class="text-text">Each resource item has three action icons:</strong></p>
+    <div class="flex flex-wrap gap-3 mb-4">
+      <span class="inline-flex items-center gap-1.5 bg-surface rounded-lg px-3 py-1.5 text-xs">
+        <span class="text-primary">✎</span> <strong>Edit</strong> — appears on hover
+      </span>
+      <span class="inline-flex items-center gap-1.5 bg-surface rounded-lg px-3 py-1.5 text-xs">
+        <span class="text-warning">☆</span> <strong>Bookmark</strong> — always visible
+      </span>
+      <span class="inline-flex items-center gap-1.5 bg-surface rounded-lg px-3 py-1.5 text-xs">
+        <span class="text-error">🗑</span> <strong>Delete</strong> — always visible
+      </span>
+    </div>
+  </div>
+
+  <!-- CRUD Operations -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Working with Resources</h3>
+
+    <div class="space-y-5">
+      <div class="border-b border-border pb-4">
+        <h4 class="font-medium text-text mb-2 flex items-center gap-2">
+          <span class="w-5 h-5 rounded bg-success/10 text-success flex items-center justify-center text-xs">+</span>
+          Adding a Resource
+        </h4>
+        <p class="text-sm text-text-muted">Click the <strong>"Add Resource"</strong> button at the bottom of any Section Card. In the Create Resource modal, enter the <strong>Resource Link</strong> (URL) and <strong>Title</strong>. Select the resource type using the type buttons: <strong>Link</strong>, <strong>PDF</strong>, or <strong>Video</strong>. Click <strong>Create</strong> to save.</p>
+      </div>
+      <div class="border-b border-border pb-4">
+        <h4 class="font-medium text-text mb-2 flex items-center gap-2">
+          <span class="w-5 h-5 rounded bg-primary/10 text-primary flex items-center justify-center text-xs">✎</span>
+          Editing a Resource
+        </h4>
+        <p class="text-sm text-text-muted"><strong>Hover</strong> over any resource item to reveal the edit icon. Click it to open the Edit Resource modal where you can update the link and title.</p>
+      </div>
+      <div>
+        <h4 class="font-medium text-text mb-2 flex items-center gap-2">
+          <span class="w-5 h-5 rounded bg-error/10 text-error flex items-center justify-center text-xs">✕</span>
+          Deleting a Resource
+        </h4>
+        <p class="text-sm text-text-muted">Click the delete icon on any resource item. A confirmation modal will appear warning that all content associated with the resource (notes, cards, exam questions referencing it) will also be removed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sections management -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Managing Sections</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">Sections are the organizational groups within the Resources List View (and all other modes). You can manage them from the Resources view:</p>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-surface rounded-lg p-4">
+        <p class="font-medium text-sm text-text mb-1">Add Section</p>
+        <p class="text-xs text-text-muted">Click the <strong>"Add Section"</strong> floating button in the bottom-right corner of the page.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <p class="font-medium text-sm text-text mb-1">Edit Section</p>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a section card title to reveal the edit icon. Rename the section.</p>
+      </div>
+      <div class="bg-surface rounded-lg p-4">
+        <p class="font-medium text-sm text-text mb-1">Delete Section</p>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a section card title to reveal the delete icon. All contents within the section will be deleted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 5 — NOTES MODE                             -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="notes-mode" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">5</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Notes Mode</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">Notes Mode provides a rich-text note-taking experience. Create notes, organize them by section, and write detailed study materials with full formatting support.</p>
+
+  <!-- List View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">List View</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The Notes List View displays Section Cards with note items. Each note item shows the note's title. Click any note to open it in the Detail View.</p>
+    <div class="space-y-3">
+      <div class="border-b border-border pb-3">
+        <h4 class="font-medium text-sm text-text mb-1">Creating a Note</h4>
+        <p class="text-xs text-text-muted">Click <strong>"Add Note"</strong> on any Section Card. In the Create Note modal, enter a title and select the section. The note will be created and you'll be taken directly to the Detail View to start writing.</p>
+      </div>
+      <div class="border-b border-border pb-3">
+        <h4 class="font-medium text-sm text-text mb-1">Editing a Note Title</h4>
+        <p class="text-xs text-text-muted"><strong>Hover</strong> over a note item to reveal the edit icon. Click it to rename the note via the Edit Note modal.</p>
+      </div>
+      <div>
+        <h4 class="font-medium text-sm text-text mb-1">Deleting a Note</h4>
+        <p class="text-xs text-text-muted">Click the delete icon on any note item. A confirmation modal will ask you to confirm deletion.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Detail View — Rich Text Editor</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The Detail View is a full-page rich text editor for writing and editing note content. The toolbar at the top provides formatting options:</p>
+
+    <!-- Toolbar mockup -->
+    <div class="bg-surface rounded-lg border border-border p-3 mb-5 flex flex-wrap gap-2 items-center">
+      <span class="px-2 py-1 bg-card border border-border rounded text-sm font-bold">B</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-sm italic">I</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-sm underline">U</span>
+      <span class="w-px h-5 bg-border mx-1"></span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-xs">⇧ Indent</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-xs">≡ Align</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-xs"># Heading</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-xs">⊞ List</span>
+      <span class="px-2 py-1 bg-card border border-border rounded text-xs">T Format</span>
+    </div>
+
+    <p class="text-[15px] leading-relaxed text-text-muted mb-3"><strong class="text-text">Key features of the Detail View:</strong></p>
+    <div class="space-y-2 mb-5">
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-primary mt-0.5">→</span>
+        <span><strong class="text-text">Note Title</strong> appears at the top. Hover over it to reveal an edit icon for renaming.</span>
+      </div>
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-primary mt-0.5">→</span>
+        <span><strong class="text-text">Save &amp; Close</strong> button at the bottom-right saves your changes and returns to the List View.</span>
+      </div>
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-primary mt-0.5">→</span>
+        <span><strong class="text-text">Cancel</strong> button at the bottom-left discards unsaved changes and returns to the List View.</span>
+      </div>
+    </div>
+
+    <div class="bg-warning/5 border-l-4 border-warning rounded-r-lg p-4 flex gap-3 items-start">
+      <svg class="w-5 h-5 text-warning flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+      <p class="text-sm text-text"><strong>Important:</strong> Always use <strong>Save &amp; Close</strong> before leaving a note to ensure your changes are saved. Navigating away without saving will discard your edits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 6 — CARDS (FLASHCARDS) MODE                -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="cards-mode" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">6</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Cards (Flashcards) Mode</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">Flashcards are two-sided study tools for active recall. Each card has a <strong class="text-text">front side</strong> (question, prompt, or term) and a <strong class="text-text">back side</strong> (answer or definition). Cards can also reference supporting resources from your notebook.</p>
+
+  <!-- List View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">List View — Deck Overview</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The Cards List View displays Section Cards showing deck statistics: the section title, total number of cards in the deck, and last modified date. Each Section Card has an <strong class="text-text">"Open Deck"</strong> button.</p>
+    <div class="bg-surface rounded-lg border border-border p-4 max-w-sm">
+      <div class="flex justify-between items-start mb-2">
+        <div>
+          <h4 class="font-medium text-sm text-text">Einstein Trust Layer (15%)</h4>
+          <p class="text-xs text-text-muted">Total cards in deck: 12</p>
+          <p class="text-xs text-text-muted">Last Modified: 04/25/2026</p>
+        </div>
+        <span class="px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary border border-primary/20 flex-shrink-0 mt-1">☆ ✎</span>
+      </div>
+      <div class="flex justify-end">
+        <span class="inline-block bg-card border border-border rounded px-3 py-1 text-xs font-medium text-text-muted">Open Deck</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Detail View — Study Carousel</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">The Detail View displays flashcards one at a time in a carousel. Here's how to interact with them:</p>
+
+    <div class="space-y-3 mb-5">
+      <div class="flex gap-3 items-center bg-surface rounded-lg p-3">
+        <kbd class="bg-card border border-border shadow-sm rounded px-2 py-1 text-xs font-mono font-semibold text-text min-w-[70px] text-center">Click</kbd>
+        <span class="text-sm text-text-muted">or press <kbd class="bg-card border border-border shadow-sm rounded px-2 py-0.5 text-xs font-mono">Space</kbd> to <strong class="text-text">flip the card</strong> and reveal the other side</span>
+      </div>
+      <div class="flex gap-3 items-center bg-surface rounded-lg p-3">
+        <kbd class="bg-card border border-border shadow-sm rounded px-2 py-1 text-xs font-mono font-semibold text-text min-w-[70px] text-center">← →</kbd>
+        <span class="text-sm text-text-muted">Use the <strong class="text-text">arrow buttons</strong> at the bottom center to navigate between cards</span>
+      </div>
+      <div class="flex gap-3 items-center bg-surface rounded-lg p-3">
+        <span class="bg-card border border-border shadow-sm rounded px-2 py-1 text-xs font-mono font-semibold text-text min-w-[70px] text-center">Close</span>
+        <span class="text-sm text-text-muted">Click the <strong class="text-text">Close button</strong> (bottom-right) to return to the List View</span>
+      </div>
+    </div>
+
+    <p class="text-[15px] leading-relaxed text-text-muted mb-3"><strong class="text-text">Action buttons</strong> at the top-right of the Detail View:</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center gap-1.5 bg-success/5 border border-success/20 rounded-lg px-3 py-1.5 text-xs text-success font-medium">+ Add</span>
+      <span class="inline-flex items-center gap-1.5 bg-primary/5 border border-primary/20 rounded-lg px-3 py-1.5 text-xs text-primary font-medium">✎ Edit</span>
+      <span class="inline-flex items-center gap-1.5 bg-secondary/5 border border-secondary/20 rounded-lg px-3 py-1.5 text-xs text-secondary font-medium">⇅ Sort</span>
+      <span class="inline-flex items-center gap-1.5 bg-error/5 border border-error/20 rounded-lg px-3 py-1.5 text-xs text-error font-medium">✕ Delete</span>
+    </div>
+  </div>
+
+  <!-- Upsert Wizard -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Creating &amp; Editing Cards — 3-Page Wizard</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-5">Clicking <strong>Add</strong> or <strong>Edit</strong> launches a three-page wizard for building or modifying flashcards:</p>
+
+    <!-- Wizard steps -->
+    <div class="space-y-4">
+      <!-- Page 1 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</div>
+        <div class="flex-1 bg-surface rounded-lg p-4 border border-border/50">
+          <h4 class="font-medium text-text mb-1">Front Side</h4>
+          <p class="text-sm text-text-muted">Enter the question, prompt, or term for the front of the card. Text automatically scales down to fit without scrolling. Use <strong>Cancel</strong> to abort or <strong>Next</strong> to proceed.</p>
+        </div>
+      </div>
+      <!-- Page 2 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</div>
+        <div class="flex-1 bg-surface rounded-lg p-4 border border-border/50">
+          <h4 class="font-medium text-text mb-1">Back Side</h4>
+          <p class="text-sm text-text-muted">Enter the answer or definition using a <strong>rich text editor</strong>. You can format text with bold, italics, lists, and more. Use <strong>Back</strong> to revisit the front or <strong>Next</strong> to continue.</p>
+        </div>
+      </div>
+      <!-- Page 3 -->
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">3</div>
+        <div class="flex-1 bg-surface rounded-lg p-4 border border-border/50">
+          <h4 class="font-medium text-text mb-1">Supporting Resources</h4>
+          <p class="text-sm text-text-muted">Select resources from the notebook to link to this card. Use the <strong>Resource Selector</strong> dropdown to add items, and the <strong>sort buttons</strong> to order them. Click <strong>Save</strong> to commit all data or <strong>Cancel</strong> to discard.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 bg-highlight border-l-4 border-primary rounded-r-lg p-4 flex gap-3 items-start">
+      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+      <p class="text-sm text-secondary"><strong>Tip:</strong> The Save button only appears on Page 3. You must complete all three pages to save a card. Clicking Cancel at any point discards all changes.</p>
+    </div>
+  </div>
+
+  <!-- Sort & View Resources -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Additional Card Features</h3>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div>
+        <h4 class="font-medium text-text mb-2">Sorting Cards</h4>
+        <p class="text-sm text-text-muted">Click the <strong>Sort</strong> action button from the Detail View to open the Card Sort View. Drag cards into your preferred order using the sort buttons, then click <strong>Save</strong> to apply or <strong>Cancel</strong> to discard.</p>
+      </div>
+      <div>
+        <h4 class="font-medium text-text mb-2">View Referenced Resources</h4>
+        <p class="text-sm text-text-muted">At the bottom of the Detail View, click <strong>"View Resources"</strong> to see all resources linked to the current card. Each resource is clickable and opens in a new tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 7 — EXAMS MODE                             -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="exams-mode" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">7</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Exams Mode</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <p class="text-[15px] leading-relaxed text-text-muted mb-6">Exams Mode lets you create and take multiple-choice practice exams. Questions are presented one at a time with answer choices. After submitting, you see the correct answer, explanation, and supporting resources.</p>
+
+  <!-- List View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">List View — Exam Overview</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">Similar to Cards, the Exam List View shows Section Cards with exam statistics: total questions and last modified date. Each card has an <strong class="text-text">"Open Exam"</strong> button to launch the exam.</p>
+  </div>
+
+  <!-- Detail View -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Detail View — Taking an Exam</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">Questions are displayed one at a time. Here's the exam-taking workflow:</p>
+
+    <div class="space-y-4 mb-5">
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">1</div>
+        <div>
+          <p class="text-sm text-text"><strong>Read the question</strong> displayed at the top of the page.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">2</div>
+        <div>
+          <p class="text-sm text-text"><strong>Select an answer</strong> from the multiple-choice options (3 to 6 choices labeled A, B, C, etc.).</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">3</div>
+        <div>
+          <p class="text-sm text-text"><strong>Click "Submit"</strong> to check your answer.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-success/10 text-success flex items-center justify-center font-bold text-sm">4</div>
+        <div>
+          <p class="text-sm text-text"><strong>Review the result</strong> — the correct answer is highlighted in green, along with a detailed explanation and list of related resources.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex flex-wrap gap-4 items-center text-sm text-text-muted">
+      <span><strong class="text-text">Navigation:</strong></span>
+      <span class="inline-flex items-center gap-1.5 bg-surface rounded px-2 py-1 text-xs">← → Arrow buttons to move between questions</span>
+      <span class="inline-flex items-center gap-1.5 bg-surface rounded px-2 py-1 text-xs">Close button returns to List View</span>
+    </div>
+  </div>
+
+  <!-- Upsert Wizard -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-3">Creating &amp; Editing Questions — 2-Page Wizard</h3>
+    <p class="text-[15px] leading-relaxed text-text-muted mb-5">Click <strong>Add</strong> or <strong>Edit</strong> from the Detail View to launch the question wizard:</p>
+
+    <div class="space-y-4">
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</div>
+        <div class="flex-1 bg-surface rounded-lg p-4 border border-border/50">
+          <h4 class="font-medium text-text mb-1">Question &amp; Answers</h4>
+          <p class="text-sm text-text-muted">Enter the question text. Define between <strong>3 and 6 answer candidates</strong>. Select which answer is correct. Write an explanation that will be shown after the user submits. Click <strong>Next</strong> to proceed or <strong>Cancel</strong> to abort.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</div>
+        <div class="flex-1 bg-surface rounded-lg p-4 border border-border/50">
+          <h4 class="font-medium text-text mb-1">Supporting Resources</h4>
+          <p class="text-sm text-text-muted">Select resources from the notebook to provide context for the question. Sort them to define the display order. Click <strong>Save</strong> to commit or <strong>Back</strong> to return to Page 1.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Additional Exam Features</h3>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div>
+        <h4 class="font-medium text-text mb-2">Sorting Questions</h4>
+        <p class="text-sm text-text-muted">Click the <strong>Sort</strong> action button to open the Question Sort View. Rearrange questions using the sort buttons, then <strong>Save</strong> or <strong>Cancel</strong>.</p>
+      </div>
+      <div>
+        <h4 class="font-medium text-text mb-2">Bookmarking Questions</h4>
+        <p class="text-sm text-text-muted">Use the <strong>bookmark toggle</strong> on any question in the Detail View to add it to the Bookmarked Exams section for quick revisiting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 8 — BOOKMARKS                              -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="bookmarks" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">8</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Bookmarks</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <p class="text-[15px] leading-relaxed text-text-muted mb-4">Bookmarks help you avoid "category clutter" by providing quick access to your most important items. The feature works consistently across all four interaction modes.</p>
+
+    <h3 class="font-semibold text-lg text-secondary mb-3">How Bookmarking Works</h3>
+    <div class="space-y-3 mb-5">
+      <div class="flex gap-3 items-start text-sm text-text-muted">
+        <svg class="w-5 h-5 text-warning flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <span>Each item (resource, note, card, or exam question) has a <strong class="text-text">bookmark toggle icon</strong> (star icon) visible on the item row.</span>
+      </div>
+      <div class="flex gap-3 items-start text-sm text-text-muted">
+        <svg class="w-5 h-5 text-warning flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <span>Click the star to <strong class="text-text">toggle bookmarking</strong>. A filled star means the item is bookmarked.</span>
+      </div>
+      <div class="flex gap-3 items-start text-sm text-text-muted">
+        <svg class="w-5 h-5 text-warning flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <span>Bookmarked items appear in a dedicated <strong class="text-text">"Bookmarked" Section Card</strong> at the top of every List View for instant access.</span>
+      </div>
+    </div>
+
+    <div class="bg-highlight border-l-4 border-primary rounded-r-lg p-4 flex gap-3 items-start">
+      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+      <p class="text-sm text-secondary"><strong>Tip:</strong> Use bookmarks to collect your most challenging flashcards or frequently referenced resources in one place — no matter which section they belong to.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 9 — AGENT SPARKY                           -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="agent-sparky" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">9</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Agent Sparky (AI Chat)</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <!-- Agent mockup -->
+    <div class="flex gap-5 items-start mb-5">
+      <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 border-2 border-accent/30 flex items-center justify-center">
+        <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/></svg>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg text-text mb-1">Agent Sparky</h3>
+        <p class="text-[15px] leading-relaxed text-text-muted">Agent Sparky is your AI-powered assistant, always visible in a panel on the right side of the notebook view. It leverages <strong class="text-text">Retrieval Augmented Generation (RAG)</strong> to search and find information across all your catalogs, topics, notebooks, and sections.</p>
+      </div>
+    </div>
+
+    <h4 class="font-medium text-sm text-text uppercase tracking-wider mb-3">What Agent Sparky Can Do</h4>
+    <div class="space-y-2 mb-5">
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-accent mt-0.5">→</span>
+        <span>Search across your entire knowledge base for specific information</span>
+      </div>
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-accent mt-0.5">→</span>
+        <span>Provide summarized answers from your resources and notes</span>
+      </div>
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-accent mt-0.5">→</span>
+        <span>Help generate study materials like flashcards and exam questions</span>
+      </div>
+      <div class="flex gap-2 items-start text-sm text-text-muted">
+        <span class="text-accent mt-0.5">→</span>
+        <span>Answer questions about your Salesforce data</span>
+      </div>
+    </div>
+
+    <h4 class="font-medium text-sm text-text uppercase tracking-wider mb-3">Suggested Prompts</h4>
+    <p class="text-sm text-text-muted mb-3">Agent Sparky provides quick-start suggested prompts you can click to get started:</p>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-block bg-primary/5 border border-primary/20 rounded-full px-4 py-1.5 text-xs text-primary font-medium">Show me my recent opportunities</span>
+      <span class="inline-block bg-primary/5 border border-primary/20 rounded-full px-4 py-1.5 text-xs text-primary font-medium">What are my top accounts?</span>
+      <span class="inline-block bg-primary/5 border border-primary/20 rounded-full px-4 py-1.5 text-xs text-primary font-medium">Create a new lead</span>
+      <span class="inline-block bg-primary/5 border border-primary/20 rounded-full px-4 py-1.5 text-xs text-primary font-medium">Analyze my sales pipeline</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  SECTION 10 — TIPS & KEYBOARD SHORTCUTS             -->
+<!-- ══════════════════════════════════════════════════ -->
+<section id="tips" class="mb-14">
+  <div class="flex items-center gap-3 mb-6">
+    <span class="flex-shrink-0 w-9 h-9 rounded-lg bg-primary text-white flex items-center justify-center font-bold text-sm">10</span>
+    <h2 class="text-2xl font-bold text-primary-dark">Tips &amp; Keyboard Shortcuts</h2>
+  </div>
+  <div class="h-0.5 bg-gradient-to-r from-primary to-primary/20 rounded mb-6"></div>
+
+  <!-- Keyboard Shortcuts -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6 mb-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Keyboard Shortcuts</h3>
+    <div class="space-y-3">
+      <div class="flex items-center gap-4 bg-surface rounded-lg p-3">
+        <kbd class="bg-card border border-border shadow-sm rounded px-3 py-1.5 text-sm font-mono font-semibold text-text min-w-[90px] text-center">Space</kbd>
+        <span class="text-sm text-text-muted">Flip a flashcard in the Cards Detail View</span>
+      </div>
+      <div class="flex items-center gap-4 bg-surface rounded-lg p-3">
+        <kbd class="bg-card border border-border shadow-sm rounded px-3 py-1.5 text-sm font-mono font-semibold text-text min-w-[90px] text-center">← →</kbd>
+        <span class="text-sm text-text-muted">Navigate between cards or exam questions (via on-screen buttons)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pro Tips -->
+  <div class="bg-card rounded-xl border border-border shadow-sm p-6">
+    <h3 class="font-semibold text-lg text-secondary mb-4">Pro Tips</h3>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">📚 Organize First</h4>
+        <p class="text-xs text-text-muted">Set up your Catalog → Topic → Notebook hierarchy before adding content. A well-organized structure makes it much easier to find information later.</p>
+      </div>
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">🔗 Resources Are Foundation</h4>
+        <p class="text-xs text-text-muted">Start by adding resources (URLs) to your notebook. Cards and exam questions can reference these resources, creating a rich learning web.</p>
+      </div>
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">⭐ Bookmark Strategically</h4>
+        <p class="text-xs text-text-muted">Bookmark items you need quick access to — difficult flashcards, key resources, or exam questions you got wrong. They appear at the top of every list.</p>
+      </div>
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">🤖 Ask Agent Sparky</h4>
+        <p class="text-xs text-text-muted">Use Agent Sparky to quickly search across your entire library. It can find information from any catalog, topic, or notebook — saving you time browsing.</p>
+      </div>
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">🔀 Hover to Discover</h4>
+        <p class="text-xs text-text-muted">Many edit and delete buttons are hidden by default and only appear when you hover over an item. This keeps the interface clean while still providing quick access.</p>
+      </div>
+      <div class="bg-highlight rounded-lg p-4 border border-primary/10">
+        <h4 class="font-medium text-sm text-primary-dark mb-2">📋 Use Console Tabs</h4>
+        <p class="text-xs text-text-muted">NotebookSF uses the Salesforce Console layout. Open multiple notebooks as tabs and quickly switch between them without losing your place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  FOOTER                                              -->
+<!-- ══════════════════════════════════════════════════ -->
+<footer class="bg-primary-dark text-white/60 py-8">
+  <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+    <div class="flex items-center gap-3">
+      <svg class="w-6 h-6 text-white/40" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="13" y="6" width="26" height="40" rx="3" fill="white" fill-opacity="0.2" stroke="currentColor" stroke-width="2"/>
+        <line x1="19" y1="16" x2="33" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="19" y1="22" x2="31" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <line x1="19" y1="28" x2="29" y2="28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+      </svg>
+      <span>NotebookSF User's Guide — Version 1.0</span>
+    </div>
+    <div class="text-white/40">
+      Built on the Salesforce Platform • Cosmos Design
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<a href="#" class="fixed bottom-6 right-6 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary-dark transition-colors z-50" title="Back to top">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+</a>
+
+</body>
+</html>
