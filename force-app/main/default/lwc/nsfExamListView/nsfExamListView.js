@@ -9,6 +9,7 @@ import deleteSection from '@salesforce/apex/NSF_SectionController.deleteSection'
 
 export default class NsfExamListView extends LightningElement {
     @api notebookId = '';
+    @api hideAddSection = false;
 
     // ─── Data ─────────────────────────────────────
     @track sectionSummaries = [];
@@ -24,12 +25,6 @@ export default class NsfExamListView extends LightningElement {
     detailSectionTitle = '';
     upsertExamId = null;
     upsertSectionId = '';
-
-    // ─── Section modal state ──────────────────────
-    sectionModalHeader = '';
-    sectionModalTitle = '';
-    sectionModalId = null;
-    sectionModalError = '';
 
     // ─── Delete confirmation state ────────────────
     deleteTarget = {};
@@ -182,51 +177,15 @@ export default class NsfExamListView extends LightningElement {
     // SECTION CRUD
     // ═══════════════════════════════════════════════
 
-    handleAddSection() {
-        this.sectionModalHeader = 'Create Section';
-        this.sectionModalTitle = '';
-        this.sectionModalId = null;
-        this.sectionModalError = '';
-        this.template
-            .querySelector('c-lwc-modal[data-id="section-modal"]')
-            .open();
-    }
-
     handleEditSection(event) {
-        this.sectionModalHeader = 'Edit Section';
-        this.sectionModalTitle = event.detail.sectionTitle;
-        this.sectionModalId = event.detail.sectionId;
-        this.sectionModalError = '';
-        this.template
-            .querySelector('c-lwc-modal[data-id="section-modal"]')
-            .open();
-    }
-
-    handleSectionTitleChange(event) {
-        this.sectionModalTitle = event.target.value;
-    }
-
-    async handleSectionConfirm() {
-        if (!this.sectionModalTitle || !this.sectionModalTitle.trim()) {
-            this.sectionModalError = 'Title is required.';
-            return;
-        }
-        try {
-            await upsertSection({
-                sectionId: this.sectionModalId,
-                title: this.sectionModalTitle.trim(),
-                notebookId: this.notebookId
-            });
-            this.template
-                .querySelector('c-lwc-modal[data-id="section-modal"]')
-                .close();
-            this.showSuccess(
-                this.sectionModalId ? 'Section updated' : 'Section created'
-            );
-            await this._refreshAll();
-        } catch (error) {
-            this.sectionModalError = this.reduceError(error);
-        }
+        this.dispatchEvent(new CustomEvent('editsection', {
+            detail: {
+                sectionId: event.detail.sectionId,
+                sectionTitle: event.detail.sectionTitle
+            },
+            bubbles: true,
+            composed: true
+        }));
     }
 
     handleDeleteSection(event) {

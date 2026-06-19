@@ -1,3 +1,10 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
 .detail-container {
     display: flex;
     flex-direction: column;
@@ -76,7 +83,23 @@
 /* ─── Editor ─────────────────────────────────── */
 .editor-container {
     flex: 1;
-    padding: 0.75rem 1rem;
+    /* padding: 0.75rem 1rem; */
     overflow-y: auto;
     min-height: 0;
+}
+
+.rich-text-editor {
+    /* Remove focus border for slds-rich-text-editor */
+    --sds-c-rich-text-editor-focus-outline-color: transparent;
+    --sds-c-rich-text-editor-focus-outline-width: 0;
+    --sds-c-rich-text-editor-focus-box-shadow: none;
+
+    /* Remove default border */
+    --sds-c-rich-text-editor-border: none;
+    --sds-c-rich-text-editor-border-width: 0;
+    --sds-c-rich-text-editor-border-color: transparent;
+
+    /* Ensure no focus effects */
+    outline: none;
+    box-shadow: none;
 }

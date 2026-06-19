@@ -2,7 +2,7 @@
     <div class="resource-list-container">
 
         <!-- Bookmarked Resources Section -->
-        <template if:true={hasBookmarks}>
+        <template if:true={hasSections}>
             <c-nsf-section-card
                 section-title="Bookmarked Resources"
                 is-bookmark-section
@@ -63,23 +63,23 @@
         <template if:false={hasSections}>
             <div class="empty-state">
                 <lightning-icon
-                    icon-name="utility:link"
+                    icon-name="standard:link"
                     size="large"
                 ></lightning-icon>
                 <p class="slds-m-top_small slds-text-color_weak">
                     No sections yet. Click "Add Section" to get started.
                 </p>
             </div>
+            <!-- <div class="empty-state">
+                <lightning-icon
+                    icon-name="utility:link"
+                    size="large"
+                ></lightning-icon>
+                <p class="slds-m-top_small slds-text-color_weak">
+                    No sections yet. Click "Add Section" to get started.
+                </p>
+            </div> -->
         </template>
-
-        <!-- Floating Add Section button -->
-        <lightning-button
-            label="Add Section"
-            variant="brand"
-            icon-name="utility:add"
-            onclick={handleAddSection}
-            class="add-section-btn"
-        ></lightning-button>
     </div>
 
     <!-- ═══════════════════════════════════════════════ -->
@@ -125,22 +125,6 @@
                 required
             ></lightning-combobox>
         </template>
-    </c-lwc-modal>
-
-    <!-- Section Create/Edit Modal -->
-    <c-lwc-modal
-        data-id="section-modal"
-        header={sectionModalHeader}
-        confirm-button-label="Save"
-        error-message={sectionModalError}
-        onconfirm={handleSectionConfirm}
-    >
-        <lightning-input
-            label="Section Title"
-            value={sectionModalTitle}
-            onchange={handleSectionTitleChange}
-            required
-        ></lightning-input>
     </c-lwc-modal>
 
     <!-- Delete Resource Confirmation -->

@@ -4,7 +4,7 @@ const MODES = [
     { value: 'Resources', label: 'Resources', icon: 'utility:link' },
     { value: 'Notes', label: 'Notes', icon: 'utility:note' },
     { value: 'Cards', label: 'Cards', icon: 'utility:layers' },
-    { value: 'Exams', label: 'Exams', icon: 'utility:checkin' }
+    { value: 'Exams', label: 'Exams', icon: 'utility:favorite' }
 ];
 
 export default class NsfInteractionModeSelector extends LightningElement {

@@ -1,5 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%
+}
+
 .note-list-container {
-    padding: 0.5rem 0;
+    columns: 2;
+    column-gap: 1.5rem;
+    position: relative;
+    flex: 1;
 }
 
 /* ─── Note item row ──────────────────────────── */
@@ -65,14 +75,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
+    height: 100%;
     text-align: center;
+    column-span: all;
 }
 
-/* ─── Add Section floating button ────────────── */
-.add-section-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 100;
-}

@@ -1,37 +1,113 @@
 <template>
     <template if:true={hasNotebook}>
         <div class="container-wrapper">
-            <!-- Header -->
-            <!-- <div class="notebook-header">
-                <lightning-icon icon-name="standard:notebook" size="medium"></lightning-icon>
-                <h1 class="notebook-title">{notebookTitle}</h1>
-            </div> -->
+            <!-- Left Section: Header and Content -->
+            <div class="left-section">
+                <!-- Header with Mode Selector -->
+                <div class="notebook-header">
+                    <div class="header-left">
+                        <img src={notebookIconUrl} alt="Notebook" class="header-icon" />
+                        <div class="header-divider"></div>
+                        <div class="header-text">
+                            <template if:true={topicTitle}>
+                                <span class="header-breadcrumb">{topicTitle}</span>
+                            </template>
+                            <h1 class="header-title">{notebookTitle}</h1>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <c-nsf-interaction-mode-selector
+                            active-mode={activeMode}
+                            onmodechange={handleModeChange}
+                        ></c-nsf-interaction-mode-selector>
+                    </div>
+                </div>
 
-            <!-- Mode Selector -->
-            <div class="mode-selector-bar">
-                <c-nsf-interaction-mode-selector
-                    active-mode={activeMode}
-                    onmodechange={handleModeChange}
-                ></c-nsf-interaction-mode-selector>
+                <!-- Active Mode Content -->
+                <div class={computedModeContentClass}>
+                    <template if:true={isResourcesMode}>
+                        <c-nsf-resource-list-view notebook-id={notebookId} hide-add-section></c-nsf-resource-list-view>
+                    </template>
+                    <template if:true={isNotesMode}>
+                        <c-nsf-note-list-view notebook-id={notebookId} hide-add-section></c-nsf-note-list-view>
+                    </template>
+                    <template if:true={isCardsMode}>
+                        <c-nsf-card-list-view notebook-id={notebookId} hide-add-section></c-nsf-card-list-view>
+                    </template>
+                    <template if:true={isExamsMode}>
+                        <c-nsf-exam-list-view notebook-id={notebookId} hide-add-section></c-nsf-exam-list-view>
+                    </template>
+
+                    <!-- Add Section Button - positioned in container -->
+                    <template if:false={isDetailViewOpen}>
+                        <div
+                            class="add-section-btn"
+                            role="button"
+                            tabindex="0"
+                            onclick={handleAddSection}
+                        >
+                            <lightning-icon icon-name="utility:add" size="xx-small" class="add-section-icon"></lightning-icon>
+                            Add Section
+                        </div>
+                    </template>
+                </div>
             </div>
 
-            <!-- Active Mode Content -->
-            <div class="mode-content">
-                <template if:true={isResourcesMode}>
-                    <c-nsf-resource-list-view notebook-id={notebookId}></c-nsf-resource-list-view>
-                </template>
-                <template if:true={isNotesMode}>
-                    <c-nsf-note-list-view notebook-id={notebookId}></c-nsf-note-list-view>
-                </template>
-                <template if:true={isCardsMode}>
-                    <c-nsf-card-list-view notebook-id={notebookId}></c-nsf-card-list-view>
-                </template>
-                <template if:true={isExamsMode}>
-                    <c-nsf-exam-list-view notebook-id={notebookId}></c-nsf-exam-list-view>
-                </template>
+            <!-- Agent Panel (Right Sidebar) -->
+            <div class="agent-panel">
+                    <!-- Panel Header -->
+                    <div class="agent-header">
+                        <h2 class="agent-title">Agent Sparky</h2>
+                    </div>
+
+                    <!-- Messages Area -->
+                    <div class="agent-messages">
+                        <div class="message-item">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-bubble">
+                                <p>Hello! I'm Einstein, your AI assistant. I can help you with data analysis, create records, and answer questions about your Salesforce data. How can I help you today?</p>
+                            </div>
+                            <div class="message-time">01:22 PM</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="agent-actions">
+                        <button class="action-button">Show me my recent opportunities</button>
+                        <button class="action-button">What are my top accounts?</button>
+                        <button class="action-button">Create a new lead</button>
+                        <button class="action-button">Analyze my sales pipeline</button>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="agent-input">
+                        <input type="text" placeholder="Ask Einstein anything..." class="agent-input-field" />
+                        <button class="agent-send-btn">→</button>
+                    </div>
+                </div>
             </div>
         </div>
     </template>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- MODALS                                         -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- Section Create/Edit Modal -->
+    <c-lwc-modal
+        data-id="section-modal"
+        header={sectionModalHeader}
+        confirm-button-label="Save"
+        error-message={sectionModalError}
+        onconfirm={handleSectionConfirm}
+    >
+        <lightning-input
+            label="Section Title"
+            value={sectionModalTitle}
+            onchange={handleSectionTitleChange}
+            required
+        ></lightning-input>
+    </c-lwc-modal>
 
     <template if:false={hasNotebook}>
         <div class="empty-state">
