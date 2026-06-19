@@ -1,7 +1,9 @@
 import { LightningElement, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { loadScript } from 'lightning/platformResourceLoader';
 import getNoteDetail from '@salesforce/apex/NSF_ContentController.getNoteDetail';
 import saveNoteContent from '@salesforce/apex/NSF_ContentController.saveNoteContent';
+import nsfRichTextFix from '@salesforce/resourceUrl/nsfRichTextFix';
 
 export default class NsfNoteDetailView extends LightningElement {
     @api noteId = '';
@@ -20,8 +22,29 @@ export default class NsfNoteDetailView extends LightningElement {
     // LIFECYCLE
     // ═══════════════════════════════════════════════════
 
+    _stylesLoaded = false;
+
     connectedCallback() {
         this._loadNote();
+        this._loadCustomStyles();
+    }
+
+    /**
+     * Load a script that injects CSS into the lightning-input-rich-text
+     * shadow DOM to remove its border. The script runs in the page context
+     * (outside Locker Service) where shadow roots are accessible.
+     */
+    _loadCustomStyles() {
+        if (this._stylesLoaded) {
+            return;
+        }
+        loadScript(this, nsfRichTextFix)
+            .then(() => {
+                this._stylesLoaded = true;
+            })
+            .catch(() => {
+                // Silently ignore — border is cosmetic
+            });
     }
 
     // ═══════════════════════════════════════════════════

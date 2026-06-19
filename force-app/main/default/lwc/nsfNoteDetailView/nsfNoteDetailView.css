@@ -89,17 +89,24 @@
 }
 
 .rich-text-editor {
-    /* Remove focus border for slds-rich-text-editor */
+    /* Override global SLDS tokens that control the border */
+    --lwc-borderWidthThin: 0px;
+    --slds-g-color-border-1: transparent;
+    --slds-g-color-border-2: transparent;
+
+    /* Remove focus ring (box-shadow used as focus indicator) */
+    --slds-g-shadow-outline-focus-1: none;
+    --lwc-shadowButtonFocus: none;
+
+    /* Remove focus border/shadow hooks */
     --sds-c-rich-text-editor-focus-outline-color: transparent;
     --sds-c-rich-text-editor-focus-outline-width: 0;
     --sds-c-rich-text-editor-focus-box-shadow: none;
+    --sds-c-textarea-shadow-focus: none;
+    --slds-c-textarea-shadow-focus: none;
 
-    /* Remove default border */
-    --sds-c-rich-text-editor-border: none;
-    --sds-c-rich-text-editor-border-width: 0;
-    --sds-c-rich-text-editor-border-color: transparent;
-
-    /* Ensure no focus effects */
+    /* Ensure no focus effects on host */
     outline: none;
     box-shadow: none;
+    border: none;
 }
