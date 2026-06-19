@@ -184,7 +184,7 @@ public with sharing class NSF_ContentController {
     /**
      * Returns a single note with its rich text content for the detail view editor.
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static NSF_Note__c getNoteDetail(String noteId) {
         List<NSF_Note__c> notes = [
             SELECT Id, Name, Title__c, Content__c, NSF_SectionId__c,
