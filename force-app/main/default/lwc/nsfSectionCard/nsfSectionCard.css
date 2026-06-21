@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'CaveatVariableFont';
+    src: url('/resource/1782016951000/CaveatVariableFont?');
+}
+
 :host {
     break-inside: avoid;
     display: block;
@@ -10,27 +15,49 @@
     padding: 1rem;
     margin-bottom: 0.75rem;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s
+        ease-in-out, box-shadow 0.2s
+        ease-in-out;
+}
+
+.section-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .bookmark-section {
     border-left: 4px solid #f2a93b;
+    background-color: #fefcfa;
 }
 
 .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 0.5rem;
-    min-height: 2rem;
+    /* margin-bottom: 0.5rem;
+    min-height: 2rem; */
 }
 
 .section-title {
-    font-size: 1rem;
-    font-weight: 700;
+    flex: 1;
+    display: flex;
+    font-family: 'CaveatVariableFont';
+    font-size: 2rem;
     color: #080707;
+    border-bottom: 2px solid #fff6f6;
 }
 
 .bookmark-title {
+    font-size: 1.2rem;
+    font-weight: 200;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #fff6f6;
     color: #b8620a;
 }
 
@@ -48,5 +75,24 @@
     justify-content: flex-end;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
-    border-top: 1px solid #f0f0f0;
+}
+
+.action-btn {
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #0070d2;
+    padding: 0.35rem 1rem;;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+}
+
+.action-btn:hover {
+    background: #f0f6ff;
+    border-color: #005fb2;
+    color: #005fb2;
 }

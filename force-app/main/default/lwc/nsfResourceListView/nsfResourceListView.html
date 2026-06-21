@@ -4,7 +4,7 @@
         <!-- Bookmarked Resources Section -->
         <template if:true={hasSections}>
             <c-nsf-section-card
-                section-title="Bookmarked Resources"
+                section-title="Resource Bookmarks"
                 is-bookmark-section
             >
                 <template for:each={bookmarkedResources} for:item="res">
@@ -20,6 +20,9 @@
                         ontogglebookmark={handleToggleBookmark}
                         ondeleteresource={handleConfirmDeleteResource}
                     ></c-nsf-resource-item>
+                </template>
+                <template if:false={hasBookmarks}>
+                    <p class="empty-section-text">No bookmarks yet.</p>
                 </template>
             </c-nsf-section-card>
         </template>

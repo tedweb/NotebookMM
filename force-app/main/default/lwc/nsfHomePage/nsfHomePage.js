@@ -187,13 +187,6 @@ export default class NsfHomePage extends NavigationMixin(LightningElement) {
     // TOPIC CRUD
     // ═══════════════════════════════════════════════════════
 
-    handleAddTopicKeydown(event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            this.handleAddTopic();
-        }
-    }
-
     handleAddTopic() {
         this.topicModalHeader = 'New Topic';
         this.topicModalTitle = '';

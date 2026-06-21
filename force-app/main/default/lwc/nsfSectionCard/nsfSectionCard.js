@@ -40,7 +40,7 @@ export default class NsfSectionCard extends LightningElement {
     }
 
     get titleClass() {
-        return this.isBookmarkSection ? 'section-title bookmark-title' : 'section-title';
+        return this.isBookmarkSection ? 'bookmark-title' : 'section-title';
     }
 
     get cardClass() {

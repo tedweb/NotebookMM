@@ -21,7 +21,7 @@ export default class NsfResourceItem extends LightningElement {
     }
 
     get bookmarkIcon() {
-        return this.isBookmarked ? 'utility:favorite' : 'utility:favorite_alt';
+        return this.isBookmarked ? 'utility:bookmark' : 'utility:bookmark_stroke';
     }
 
     get showActions() {

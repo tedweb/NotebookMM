@@ -109,13 +109,12 @@
 }
 
 .add-notebook-container {
-    /* margin-top: 0.5rem; */
     padding-top: 0.5rem;
-    /* border-top: 1px solid #f0f0f0; */
-    text-align: end;
-}
+    display: flex;
+    flex-direction: row;
+    justify-content: end;}
 
-.add-topic-btn {
+/* .add-topic-btn {
     border: 1px solid rgba(0, 0, 0, 0.35);
     border-radius: 15px;
     padding: 0.35rem 0.75rem;
@@ -132,4 +131,26 @@
 .add-notebook-icon {
     --sds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.5);
     margin: 0 5px 2px 0;
+} */
+
+.action-btn {
+    width: fit-content;
+
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #0070d2;
+    padding: 0.35rem 1rem;;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+}
+
+.action-btn:hover {
+    background: #f0f6ff;
+    border-color: #005fb2;
+    color: #005fb2;
 }

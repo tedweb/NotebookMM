@@ -66,7 +66,7 @@
     margin: 0 0 1.25rem 0;
 }
 
-.add-topic-btn {
+/* .add-topic-btn {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
@@ -91,4 +91,30 @@
 
 .add-topic-icon {
     --slds-c-icon-color-foreground-default: #ffffff;
+} */
+
+.action-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+    display: inline-flex;
+
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    color: #0070d2;
+    padding: 0.35rem 1rem;;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+}
+
+.action-btn:hover {
+    background: #f0f6ff;
+    border-color: #005fb2;
+    color: #005fb2;
 }

@@ -128,11 +128,17 @@
     gap: 0.4rem;
     background-color: rgba(255, 255, 255, 0.75);
     color: #0070d2;
-    padding: 0.3rem 1rem;;
+    padding: 0.35rem 1rem;;
     font-size: 0.8125rem;
     font-weight: 700;
     cursor: pointer;
     user-select: none;
     border: 1px solid #cccccc;
     border-radius: 20px;
+}
+
+.action-btn:hover {
+    background: #f0f6ff;
+    border-color: #005fb2;
+    color: #005fb2;
 }

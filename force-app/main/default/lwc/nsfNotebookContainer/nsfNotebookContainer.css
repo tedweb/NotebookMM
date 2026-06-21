@@ -17,6 +17,7 @@
     flex-direction: column;
     flex: 1;
     overflow: hidden;
+    z-index: 0;
 }
 
 .notebook-header {
@@ -138,9 +139,13 @@
     flex-direction: column;
     width: 400px;
     background: #f8f9fa;
-    border-left: 1px solid #e5e5e5;
     overflow: hidden;
     flex-shrink: 0;
+    border-top: 1px solid rgb(201, 201, 201);
+    border-radius: 4px 0 0 4px;
+    border-left: 1px solid #cccccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
 .agent-header {
