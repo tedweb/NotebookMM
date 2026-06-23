@@ -23,6 +23,8 @@ export default class NsfCardDetailView extends LightningElement {
     _showResources = false;
     _isLoading = true;
     _keyHandler;
+    _resizeHandler;
+    @track _slideWidth = 0;
 
     // ─── Bookmark section handling ────────────────
     _isBookmarkSection = false;
@@ -33,8 +35,10 @@ export default class NsfCardDetailView extends LightningElement {
 
     connectedCallback() {
         this._keyHandler = this.handleKeyDown.bind(this);
+        this._resizeHandler = this._recalcSlideWidth.bind(this);
         // eslint-disable-next-line @lwc/lwc/no-document-query
         window.addEventListener('keydown', this._keyHandler);
+        window.addEventListener('resize', this._resizeHandler);
         this._isBookmarkSection = this.sectionId === '__bookmarks__';
         this.loadSections();
         this.loadCards();
@@ -42,9 +46,13 @@ export default class NsfCardDetailView extends LightningElement {
 
     disconnectedCallback() {
         window.removeEventListener('keydown', this._keyHandler);
+        window.removeEventListener('resize', this._resizeHandler);
     }
 
     renderedCallback() {
+        if (!this._slideWidth) {
+            this._recalcSlideWidth();
+        }
         if (!this._isFlipped) {
             this._autoScaleFront();
         }
@@ -130,12 +138,29 @@ export default class NsfCardDetailView extends LightningElement {
         return this.cards[this.currentIndex] || null;
     }
 
-    get frontText() {
-        return this.currentCard ? this.currentCard.Front__c || '' : '';
+    get displayCards() {
+        const slideStyle = this._slideWidth
+            ? `width: ${this._slideWidth}px; min-width: ${this._slideWidth}px; flex: 0 0 ${this._slideWidth}px;`
+            : '';
+        return this.cards.map((card, index) => ({
+            Id: card.Id,
+            index,
+            frontText: card.Front__c || '',
+            backContent: card.Back__c || '',
+            isCurrent: index === this.currentIndex,
+            isHidden: index !== this.currentIndex,
+            slideStyle,
+            cardInnerClass:
+                index === this.currentIndex && this._isFlipped
+                    ? 'card-inner flipped'
+                    : 'card-inner'
+        }));
     }
 
-    get backContent() {
-        return this.currentCard ? this.currentCard.Back__c || '' : '';
+    get trackStyle() {
+        const peekAmount = 20;
+        const offset = this.currentIndex * this._slideWidth;
+        return `transform: translateX(-${offset}px); padding-left: ${peekAmount}px;`;
     }
 
     get cardIndexLabel() {
@@ -155,8 +180,12 @@ export default class NsfCardDetailView extends LightningElement {
         return this.currentIndex < this.cards.length - 1;
     }
 
-    get cardInnerClass() {
-        return this._isFlipped ? 'card-inner flipped' : 'card-inner';
+    get disablePrevious() {
+        return !this.hasPrevious;
+    }
+
+    get disableNext() {
+        return !this.hasNext;
     }
 
     get bookmarkIcon() {
@@ -191,7 +220,9 @@ export default class NsfCardDetailView extends LightningElement {
     // CARD INTERACTIONS
     // ═══════════════════════════════════════════════
 
-    handleFlipCard() {
+    handleFlipCard(event) {
+        const index = parseInt(event.currentTarget.dataset.index, 10);
+        if (index !== this.currentIndex) return;
         this._isFlipped = !this._isFlipped;
     }
 
@@ -200,13 +231,35 @@ export default class NsfCardDetailView extends LightningElement {
     }
 
     handleKeyDown(event) {
-        if (event.code === 'Space' || event.key === ' ') {
-            // Don't flip if user is typing in an input/textarea
-            const tagName = event.target.tagName.toLowerCase();
-            if (tagName === 'input' || tagName === 'textarea') return;
-            event.preventDefault();
-            this.toggleFlip();
+        if (this._isTypingInField(event.target)) return;
+
+        switch (event.key) {
+            case ' ':
+            case 'Spacebar':
+                event.preventDefault();
+                this.toggleFlip();
+                break;
+            case 'ArrowUp':
+            case 'ArrowDown':
+                event.preventDefault();
+                this.toggleFlip();
+                break;
+            case 'ArrowLeft':
+                event.preventDefault();
+                this.handlePrevious();
+                break;
+            case 'ArrowRight':
+                event.preventDefault();
+                this.handleNext();
+                break;
+            default:
+                break;
         }
+    }
+
+    _isTypingInField(target) {
+        const tagName = target.tagName.toLowerCase();
+        return tagName === 'input' || tagName === 'textarea';
     }
 
     async handlePrevious() {
@@ -326,12 +379,32 @@ export default class NsfCardDetailView extends LightningElement {
     }
 
     // ═══════════════════════════════════════════════
+    // SLIDE WIDTH CALCULATION
+    // ═══════════════════════════════════════════════
+
+    _recalcSlideWidth() {
+        const viewport = this.template.querySelector('.card-viewport');
+        if (!viewport) return;
+        const viewportWidth = viewport.clientWidth;
+        const peekAmount = 20;
+        const slideWidth = viewportWidth - peekAmount * 2;
+        if (slideWidth > 0 && slideWidth !== this._slideWidth) {
+            this._slideWidth = slideWidth;
+        }
+    }
+
+    // ═══════════════════════════════════════════════
     // AUTO-SCALE FRONT TEXT
     // ═══════════════════════════════════════════════
 
     _autoScaleFront() {
-        const textEl = this.template.querySelector('.card-front-text');
-        const container = this.template.querySelector('.card-face-front');
+        const slide = this.template.querySelector(
+            `.card-slide[data-index="${this.currentIndex}"]`
+        );
+        if (!slide) return;
+
+        const textEl = slide.querySelector('.card-front-text');
+        const container = slide.querySelector('.card-face-front');
         if (!textEl || !container) return;
 
         let fontSize = 48;

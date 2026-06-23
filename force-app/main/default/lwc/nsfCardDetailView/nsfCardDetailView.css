@@ -1,5 +1,8 @@
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
 }
 
 /* ─── Loading ─────────────────────────────── */
@@ -16,8 +19,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid #e5e5e5;
-    background: #fafaf9;
+    border-bottom: 1px solid #cccccc;
+    background: white;
 }
 
 .header-left {
@@ -54,38 +57,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1rem;
+    flex: 1;
+    height: 100%;
     min-height: 400px;
-    position: relative;
+    overflow: hidden;
 }
 
-/* ─── Peek cards ──────────────────────────── */
-.peek-card {
-    width: 40px;
-    height: 200px;
-    background: #f3f3f3;
-    border: 1px solid #e5e5e5;
-    border-radius: 0.5rem;
+.card-viewport {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.card-slide {
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-    flex-shrink: 0;
-}
-
-.peek-card:hover {
-    opacity: 1;
-    background: #e8e8e8;
-}
-
-.peek-left {
-    margin-right: 1rem;
-}
-
-.peek-right {
-    margin-left: 1rem;
+    min-width: 0;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 /* ─── Flashcard (3D flip) ─────────────────── */
@@ -95,6 +93,7 @@
     max-width: 600px;
     height: 360px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .card-inner {
@@ -190,8 +189,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 1rem;
-    border-top: 1px solid #e5e5e5;
-    background: #fafaf9;
+    border-top: 1px solid #cccccc;
+    background: white;
 }
 
 .footer-left {

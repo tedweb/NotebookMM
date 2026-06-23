@@ -20,13 +20,13 @@
                     variant="label-hidden"
                     class="section-selector"
                 ></lightning-combobox>
-                <lightning-button-icon
+                <!-- <lightning-button-icon
                     icon-name="utility:close"
                     alternative-text="Close section"
                     variant="bare"
                     size="medium"
                     class="slds-m-left_x-small"
-                ></lightning-button-icon>
+                ></lightning-button-icon> -->
             </div>
             <div class="header-center">
                 <span class="card-index-label">{cardIndexLabel}</span>
@@ -68,43 +68,38 @@
         <!-- ═══════════════════════════════════════ -->
         <template if:true={hasCards}>
             <div class="card-stage">
-                <!-- Previous peek -->
-                <template if:true={hasPrevious}>
-                    <div class="peek-card peek-left" onclick={handlePrevious}>
-                        <lightning-icon
-                            icon-name="utility:chevronleft"
-                            size="small"
-                        ></lightning-icon>
-                    </div>
-                </template>
-
-                <!-- Main flashcard -->
-                <div class="card-wrapper" onclick={handleFlipCard}>
-                    <div class={cardInnerClass}>
-                        <!-- Front face -->
-                        <div class="card-face card-face-front">
-                            <div class="card-front-text">{frontText}</div>
-                        </div>
-                        <!-- Back face -->
-                        <div class="card-face card-face-back">
-                            <div class="card-back-content">
-                                <lightning-formatted-rich-text
-                                    value={backContent}
-                                ></lightning-formatted-rich-text>
+                <div class="card-viewport">
+                    <div class="card-track" style={trackStyle}>
+                        <template for:each={displayCards} for:item="card">
+                            <div
+                                key={card.Id}
+                                class="card-slide"
+                                style={card.slideStyle}
+                                data-index={card.index}
+                                aria-hidden={card.isHidden}
+                            >
+                                <div
+                                    class="card-wrapper"
+                                    data-index={card.index}
+                                    onclick={handleFlipCard}
+                                >
+                                    <div class={card.cardInnerClass}>
+                                        <div class="card-face card-face-front">
+                                            <div class="card-front-text">{card.frontText}</div>
+                                        </div>
+                                        <div class="card-face card-face-back">
+                                            <div class="card-back-content">
+                                                <lightning-formatted-rich-text
+                                                    value={card.backContent}
+                                                ></lightning-formatted-rich-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
-
-                <!-- Next peek -->
-                <template if:true={hasNext}>
-                    <div class="peek-card peek-right" onclick={handleNext}>
-                        <lightning-icon
-                            icon-name="utility:chevronright"
-                            size="small"
-                        ></lightning-icon>
-                    </div>
-                </template>
             </div>
         </template>
 
@@ -164,12 +159,14 @@
                     alternative-text="Previous Card"
                     variant="border-filled"
                     onclick={handlePrevious}
+                    disabled={disablePrevious}
                 ></lightning-button-icon>
                 <lightning-button-icon
                     icon-name="utility:right"
                     alternative-text="Next Card"
                     variant="border-filled"
                     onclick={handleNext}
+                    disabled={disableNext}
                     class="slds-m-left_x-small"
                 ></lightning-button-icon>
             </div>
