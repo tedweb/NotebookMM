@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bookmark_Unique_Key__c</fullName>
+    <label>Bookmark Unique Key</label>
+    <description>Composite key combining user ID and bookmarked record ID to enforce uniqueness and prevent duplicate bookmarks under concurrency</description>
+    <inlineHelpText>Auto-populated unique key that prevents duplicate bookmarks for the same user and record</inlineHelpText>
+    <type>Text</type>
+    <length>55</length>
+    <externalId>true</externalId>
+    <unique>true</unique>
+    <caseSensitive>true</caseSensitive>
+    <required>false</required>
+</CustomField>
