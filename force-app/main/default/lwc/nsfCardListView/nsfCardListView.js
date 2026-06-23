@@ -127,12 +127,22 @@ export default class NsfCardListView extends LightningElement {
         this.detailSectionId = sectionId;
         this.detailSectionTitle = sectionTitle || '';
         this.currentView = 'detail';
+
+        this.dispatchEvent(new CustomEvent('detailviewopen', {
+            bubbles: true,
+            composed: true
+        }));
     }
 
     handleOpenBookmarkDeck() {
         this.detailSectionId = '__bookmarks__';
         this.detailSectionTitle = 'Card Bookmarks';
         this.currentView = 'detail';
+
+        this.dispatchEvent(new CustomEvent('detailviewopen', {
+            bubbles: true,
+            composed: true
+        }));
     }
 
     // ═══════════════════════════════════════════════

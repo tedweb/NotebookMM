@@ -127,12 +127,22 @@ export default class NsfExamListView extends LightningElement {
         this.detailSectionId = sectionId;
         this.detailSectionTitle = sectionTitle || '';
         this.currentView = 'detail';
+
+        this.dispatchEvent(new CustomEvent('detailviewopen', {
+            bubbles: true,
+            composed: true
+        }));
     }
 
     handleOpenBookmarkExam() {
         this.detailSectionId = '__bookmarks__';
         this.detailSectionTitle = 'Bookmarked Questions';
         this.currentView = 'detail';
+
+        this.dispatchEvent(new CustomEvent('detailviewopen', {
+            bubbles: true,
+            composed: true
+        }));
     }
 
     // ═══════════════════════════════════════════════
