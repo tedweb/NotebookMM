@@ -25,6 +25,7 @@ export default class NsfCardDetailView extends LightningElement {
     _keyHandler;
     _resizeHandler;
     @track _slideWidth = 0;
+    @track _spacerWidth = 0;
 
     // ─── Bookmark section handling ────────────────
     _isBookmarkSection = false;
@@ -158,9 +159,12 @@ export default class NsfCardDetailView extends LightningElement {
     }
 
     get trackStyle() {
-        const peekAmount = 20;
         const offset = this.currentIndex * this._slideWidth;
-        return `transform: translateX(-${offset}px); padding-left: ${peekAmount}px;`;
+        return `transform: translateX(-${offset}px);`;
+    }
+
+    get spacerStyle() {
+        return `width: ${this._spacerWidth}px; min-width: ${this._spacerWidth}px; flex-shrink: 0;`;
     }
 
     get cardIndexLabel() {
@@ -384,12 +388,18 @@ export default class NsfCardDetailView extends LightningElement {
 
     _recalcSlideWidth() {
         const viewport = this.template.querySelector('.card-viewport');
-        if (!viewport) return;
-        const viewportWidth = viewport.clientWidth;
-        const peekAmount = 20;
-        const slideWidth = viewportWidth - peekAmount * 2;
-        if (slideWidth > 0 && slideWidth !== this._slideWidth) {
-            this._slideWidth = slideWidth;
+        const cardWrapper = this.template.querySelector('.card-wrapper');
+        if (!viewport || !cardWrapper) return;
+
+        const a = viewport.clientWidth;
+        const b = 50;
+        const c = cardWrapper.clientWidth;
+        const d = c + (a - (c + 2 * b)) / 2;
+        const e = (a - d) / 2;
+
+        if (d > 0 && d !== this._slideWidth) {
+            this._slideWidth = d;
+            this._spacerWidth = e;
         }
     }
 

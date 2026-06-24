@@ -76,21 +76,24 @@
     will-change: transform;
 }
 
+.card-spacer {
+    flex-shrink: 0;
+    height: 100%;
+}
+
 .card-slide {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 0;
     height: 100%;
-    padding: 1rem;
     box-sizing: border-box;
 }
 
 /* ─── Flashcard (3D flip) ─────────────────── */
 .card-wrapper {
     perspective: 1200px;
-    width: 100%;
-    max-width: 600px;
+    width: 448px;
     height: 360px;
     cursor: pointer;
     flex-shrink: 0;
