@@ -48,7 +48,7 @@ export default class NsfSectionCard extends LightningElement {
     }
 
     get showActionButton() {
-        return this.actionButtonLabel && !this.isBookmarkSection;
+        return !!this.actionButtonLabel;
     }
 
     handleEditSection() {
